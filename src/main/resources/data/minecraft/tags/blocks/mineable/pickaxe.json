@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "extra_terracotta_utilities:enderized_magenta_glazed_terracotta",
+	"extra_terracotta_utilities:powered_magenta_glazed_terracotta",
+	"extra_terracotta_utilities:allayed_magenta_glazed_terracotta"
+  ]
+}

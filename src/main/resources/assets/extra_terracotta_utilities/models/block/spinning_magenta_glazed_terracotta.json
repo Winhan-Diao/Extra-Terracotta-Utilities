@@ -1,0 +1,22 @@
+{
+    "parent": "block/block",
+    "textures": {
+        "top": "extra_terracotta_utilities:block/spinning_magenta_glazed_terracotta_top",
+        "front": "extra_terracotta_utilities:block/spinning_magenta_glazed_terracotta",
+        "back": "extra_terracotta_utilities:block/spinning_magenta_glazed_terracotta_back",
+        "particle": "extra_terracotta_utilities:block/spinning_magenta_glazed_terracotta"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "uv": [ 16, 16, 0, 0 ], "texture": "#back", "cullface": "down" },
+                "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#top", "cullface": "up" },
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#front", "cullface": "north", "rotation": 270},
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#front", "cullface": "south", "rotation": 270 },
+                "west":  { "uv": [ 16, 16, 0, 0 ], "texture": "#front", "cullface": "west", "rotation": 90 },
+                "east":  { "uv": [ 16, 16, 0, 0 ], "texture": "#front", "cullface": "east", "rotation": 90 }
+            }
+        }
+    ]
+}
