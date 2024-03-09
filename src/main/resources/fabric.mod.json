@@ -3,15 +3,15 @@
 	"id": "extra_terracotta_utilities",
 	"version": "${version}",
 	"name": "Extra Terracotta Utilities",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Add several functional and utility terracotta that has the properties of \"arrow\"!",
 	"authors": [
-		"Me!"
+		"Winhan Diao"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/extra_terracotta_utilities/icon.png",
 	"environment": "*",
 	"entrypoints": {
