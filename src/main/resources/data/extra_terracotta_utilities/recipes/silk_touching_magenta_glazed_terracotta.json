@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "SMS",
+    "SSS"
+  ],
+  "key": {
+    "M": {
+      "item": "extra_terracotta_utilities:explosive_magenta_glazed_terracotta"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "C": {
+      "tag": "minecraft:wool_carpets"
+    }
+  },
+  "result": {
+    "item": "extra_terracotta_utilities:silk_touching_magenta_glazed_terracotta",
+    "count": 1
+  }
+}

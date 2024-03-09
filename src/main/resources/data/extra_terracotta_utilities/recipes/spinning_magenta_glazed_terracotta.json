@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SMS",
+    " S "
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:magenta_glazed_terracotta"
+    },
+    "S": {
+      "item": "minecraft:sunflower"
+    }
+  },
+  "result": {
+    "item": "extra_terracotta_utilities:spinning_magenta_glazed_terracotta",
+    "count": 1
+  }
+}

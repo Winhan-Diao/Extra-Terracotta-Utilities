@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GSG",
+    "SMS",
+    "GSG"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:magenta_glazed_terracotta"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "S": {
+      "tag": "minecraft:sand"
+    }
+  },
+  "result": {
+    "item": "extra_terracotta_utilities:explosive_magenta_glazed_terracotta",
+    "count": 1
+  }
+}

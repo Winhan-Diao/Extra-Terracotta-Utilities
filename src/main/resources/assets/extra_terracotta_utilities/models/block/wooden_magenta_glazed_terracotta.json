@@ -1,0 +1,22 @@
+{
+    "parent": "block/block",
+    "textures": {
+        "top": "extra_terracotta_utilities:block/wooden_magenta_glazed_terracotta_face",
+        "front": "extra_terracotta_utilities:block/wooden_magenta_glazed_terracotta",
+        "particle": "extra_terracotta_utilities:block/wooden_magenta_glazed_terracotta"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "uv": [ 16, 16, 0, 0 ], "texture": "#top", "cullface": "down" },
+                "up":    { "uv": [ 16, 16, 0, 0 ], "texture": "#top", "cullface": "up" },
+                "north": { "uv": [ 16, 16, 0, 0 ], "texture": "#front", "cullface": "north", "rotation":180 },
+                "south": { "uv": [ 16, 16, 0, 0 ], "texture": "#front", "cullface": "south", "rotation":180 },
+                "west":  { "uv": [ 16, 16, 0, 0 ], "texture": "#front", "cullface": "west", "rotation":180 },
+                "east":  { "uv": [ 16, 16, 0, 0 ], "texture": "#front", "cullface": "east" , "rotation":180 }
+            }
+        }
+
+    ]
+}

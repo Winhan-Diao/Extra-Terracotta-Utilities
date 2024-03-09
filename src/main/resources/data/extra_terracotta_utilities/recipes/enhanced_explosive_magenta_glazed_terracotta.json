@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "O O",
+    "OMO",
+    "OWO"
+  ],
+  "key": {
+    "M": {
+      "item": "extra_terracotta_utilities:explosive_magenta_glazed_terracotta"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "W": {
+      "item": "minecraft:wither_skeleton_skull"
+    }
+  },
+  "result": {
+    "item": "extra_terracotta_utilities:enhanced_explosive_magenta_glazed_terracotta",
+    "count": 1
+  }
+}
