@@ -6,6 +6,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -50,10 +51,12 @@ public class EntropyReducingMagentaGlazedTerracottaEntity extends BlockEntity {
             NbtCompound nbt = new NbtCompound();
             be.writeNbt(nbt);
             if (be.cooldown < 0) {      //Triggered at the end of cooldown.
-                be.placeBlockFromStack(world, pos.add(posOffset), list.get(0).getStack());
-                world.playSound(null, pos, SoundEvents.BLOCK_POWDER_SNOW_STEP, SoundCategory.BLOCKS, 1, 1);
-                list.get(0).setStack(ItemStack.EMPTY);
-                chanceToBreakIce(pos.subtract(posOffset), world, BREAK_CHANCE);
+                if (!list.isEmpty() && !list.get(0).getStack().isOf(Items.AIR)) {
+                    be.placeBlockFromStack(world, pos.add(posOffset), list.get(0).getStack());
+                    world.playSound(null, pos, SoundEvents.BLOCK_POWDER_SNOW_STEP, SoundCategory.BLOCKS, 1, 1);
+                    list.get(0).setStack(ItemStack.EMPTY);
+                    chanceToBreakIce(pos.subtract(posOffset), world, BREAK_CHANCE);
+                }
                 nbt.putInt("cooldown", ENTROPY_COOLDOWN);
                 nbt.putString("target", "null");
                 be.readNbt(nbt);
