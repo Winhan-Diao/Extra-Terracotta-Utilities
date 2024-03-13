@@ -12,9 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EnderChestBlock.class)
 public class MyMixin {
-	@Inject(at = @At("HEAD"), method = "randomDisplayTick")
+	@Inject(at = @At("HEAD"), method = "randomDisplayTick", cancellable = true)
 	private void init(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
-		return;
+		ci.cancel();
 		// This code is injected into the start of MinecraftServer.loadWorld()V
 	}
 }

@@ -3,10 +3,11 @@
 	"package": "com.github.winhan.diao.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"MyMixin"
+
 	],
 	"server": [
-		"MyMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
