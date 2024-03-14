@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "extra_terracotta_utilities:block/allayed_enderized_magenta_glazed_terracotta",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "extra_terracotta_utilities:block/allayed_enderized_magenta_glazed_terracotta",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "extra_terracotta_utilities:block/allayed_enderized_magenta_glazed_terracotta"
+    },
+    "facing=west": {
+      "model": "extra_terracotta_utilities:block/allayed_enderized_magenta_glazed_terracotta",
+      "y": 90
+    },
+	"facing=up": {
+	  "model": "extra_terracotta_utilities:block/allayed_enderized_magenta_glazed_terracotta",
+      "x": 90
+	},
+	"facing=down": {
+	  "model": "extra_terracotta_utilities:block/allayed_enderized_magenta_glazed_terracotta",
+      "x": 270
+	}
+  }
+}
