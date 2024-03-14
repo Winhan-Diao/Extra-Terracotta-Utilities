@@ -3,6 +3,7 @@ package com.github.winhan.diao;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
@@ -33,10 +34,17 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
         if (blockEntity instanceof AllayedEnderizedMagentaGlazedTerracottaEntity) {
             AllayedEnderizedMagentaGlazedTerracottaEntity aemgtEntity = (AllayedEnderizedMagentaGlazedTerracottaEntity) blockEntity;
             if (!player.getStackInHand(hand).isEmpty()) {
-                world.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_AMBIENT, SoundCategory.BLOCKS, 1, 1);
-                NbtCompound nbtToRead = new NbtCompound();
-                nbtToRead.putString("filter", itemStack.getTranslationKey());
-                aemgtEntity.readNbt(nbtToRead);
+                if (itemStack.getItem() instanceof BlockItem) {
+                    world.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_AMBIENT, SoundCategory.BLOCKS, 1, 1);
+                    NbtCompound nbtToRead = new NbtCompound();
+                    nbtToRead.putString("filter", itemStack.getTranslationKey());
+                    aemgtEntity.readNbt(nbtToRead);
+                } else {
+                    if (!world.isClient) {
+                        player.sendMessage(Text.literal("Not a block!"));
+                    }
+                    return ActionResult.SUCCESS;
+                }
             }
             NbtCompound nbtToWrite = new NbtCompound();
             aemgtEntity.writeNbt(nbtToWrite);
