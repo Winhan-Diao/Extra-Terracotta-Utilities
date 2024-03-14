@@ -21,6 +21,7 @@
   "tooltip.extra_terracotta_utilities.info.sneak": "Sneak to place in opposite direction.",
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.function_1": "  The terracotta that combines the ability of Allay.",
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.message": "The current item filtered is ",
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.message": "The current block filtered is ",
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.function_2": "  It can filter specific item drops from back to front in one block range.",
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage": "  Right click the block with the item to set filters.",
   "block.extra_terracotta_utilities.explosive_magenta_glazed_terracotta.tooltip.function_1": "  The terracotta that is similar to TNT but is controllable and reusable.",
