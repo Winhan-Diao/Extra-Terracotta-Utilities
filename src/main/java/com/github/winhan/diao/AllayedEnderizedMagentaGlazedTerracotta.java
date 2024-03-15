@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -18,13 +19,17 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlazedTerracotta {
     public static final BooleanProperty WHITELIST = BooleanProperty.of("whitelist");
@@ -66,14 +71,15 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
                     NbtCompound nbtToRead = new NbtCompound();
                     nbtToRead.putString("filter", itemStack.getTranslationKey());
                     aemgtEntity.readNbt(nbtToRead);
+                    state.updateNeighbors(world, pos, NOTIFY_ALL);
                 } else {
                     if (!world.isClient) {
-                        player.sendMessage(Text.literal("Not a block!"));
+                        player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.warn"));
                     }
                     return ActionResult.SUCCESS;
                 }
             } else if (player.isSneaking()) {
-                world.setBlockState(pos, state.with(WHITELIST, !state.get(WHITELIST)));
+                world.setBlockState(pos, state.with(WHITELIST, !state.get(WHITELIST)), NOTIFY_ALL);
                 if (!world.isClient) {
                     if (!state.get(WHITELIST)) {
                         player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist"));
@@ -134,7 +140,17 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
             double l = (double)(random.nextFloat() * (float)k);
             world.addParticle(ParticleTypes.PORTAL, d, e, f, g, h, l);
         }
-
     }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
+        tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.info.sneak"));
+        tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.function").formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.function_1").formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.function_2").formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.usage").formatted(Formatting.DARK_AQUA));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.usage").formatted(Formatting.DARK_AQUA));
+    }
+
 
 }

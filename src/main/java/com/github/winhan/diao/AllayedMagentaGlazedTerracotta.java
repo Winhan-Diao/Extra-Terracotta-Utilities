@@ -87,6 +87,7 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
                 NbtCompound nbtToRead = new NbtCompound();
                 nbtToRead.putString("filter", itemStack.getTranslationKey());
                 amgtEntity.readNbt(nbtToRead);
+                state.updateNeighbors(world, pos, NOTIFY_ALL);
             } else if (player.isSneaking()) {           //empty+sneaking
                 world.setBlockState(pos, state.with(WHITELIST, !state.get(WHITELIST)));
                 if (!world.isClient) {
@@ -117,6 +118,7 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
         tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.function_1").formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.function_2").formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.usage").formatted(Formatting.DARK_AQUA));
-        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage").formatted(Formatting.DARK_AQUA));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage_1").formatted(Formatting.DARK_AQUA));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage_2").formatted(Formatting.DARK_AQUA));
     }
 }
