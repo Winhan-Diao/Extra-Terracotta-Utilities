@@ -81,6 +81,7 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
                     } else {
                         player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist"));
                     }
+                    world.playSound(null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 1, 1);
                 }
                 return  ActionResult.SUCCESS;
             }
@@ -88,9 +89,9 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
             aemgtEntity.writeNbt(nbtToWrite);
             if (!world.isClient) {
                 if (state.get(WHITELIST)) {
-                    player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist_info").append(Text.translatable(nbtToWrite.getString("filter")).formatted(Formatting.AQUA)));
+                    player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist_info").append(Text.translatable(nbtToWrite.getString("filter")).withColor(0xFF6F8A7A)));
                 } else {
-                    player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist_info").append(Text.translatable(nbtToWrite.getString("filter")).formatted(Formatting.AQUA)));
+                    player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist_info").append(Text.translatable(nbtToWrite.getString("filter")).withColor(0xFF6F8A7A)));
                 }
             }
             return  ActionResult.SUCCESS;

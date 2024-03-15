@@ -58,5 +58,11 @@
   "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta.tooltip.usage_2": "  当裹着的丝绸磨损时，它将不能工作。",
   "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta.tooltip.usage_3": "  对它使用羊毛或地毯来修复它。发射器也能进行修复处理。",
   "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta.tooltip.usage_4": "  未损坏状态下这个方块能通过比较器发出15级红石信号",
-  "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta_uncovered.tooltip.add_1": "损坏"
+  "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta_uncovered.tooltip.add_1": "损坏",
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta": "末影悦灵品红色带釉陶瓦",
+  "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.warn": "手持物品非方块！",
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist_info": "当前白名单：",
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist_info": "当前黑名单：",
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist": "白名单模式",
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist": "黑名单模式"
 }

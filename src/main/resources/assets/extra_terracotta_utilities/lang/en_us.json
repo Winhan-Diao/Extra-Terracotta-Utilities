@@ -21,6 +21,7 @@
   "tooltip.extra_terracotta_utilities.info.sneak": "Sneak to place in opposite direction.",
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.function_1": "  The terracotta that combines the ability of Allay.",
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.message": "The current item filtered is ",
+  "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.warn": "Not a block!",
   "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist_info": "Current whitelist: ",
   "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist_info": "Current blacklist: ",
   "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist": "Set to whitelist.",
