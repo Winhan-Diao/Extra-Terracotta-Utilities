@@ -82,13 +82,24 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof AllayedMagentaGlazedTerracottaEntity) {
             AllayedMagentaGlazedTerracottaEntity amgtEntity = (AllayedMagentaGlazedTerracottaEntity) blockEntity;
-            if (!player.getStackInHand(hand).isEmpty()) {
+            if (!player.getStackInHand(hand).isEmpty()) {       //!empty
                 world.playSound(null, pos, SoundEvents.ENTITY_ALLAY_ITEM_GIVEN, SoundCategory.BLOCKS, 1, 1);
                 NbtCompound nbtToRead = new NbtCompound();
                 nbtToRead.putString("filter", itemStack.getTranslationKey());
                 amgtEntity.readNbt(nbtToRead);
+            } else if (player.isSneaking()) {           //empty+sneaking
+                world.setBlockState(pos, state.with(WHITELIST, !state.get(WHITELIST)));
+                if (!world.isClient) {
+                    if (!state.get(WHITELIST)) {
+                        player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist"));
+                    } else {
+                        player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist"));
+                    }
+                    world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 1, 1);
+                }
+                return  ActionResult.SUCCESS;
             }
-            NbtCompound nbtToWrite = new NbtCompound();
+            NbtCompound nbtToWrite = new NbtCompound();     //
             amgtEntity.writeNbt(nbtToWrite);
             if (!world.isClient) {
                 player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.message").append(Text.translatable(nbtToWrite.getString("filter")).formatted(Formatting.AQUA)));
