@@ -29,7 +29,7 @@ public class AllayedMagentaGlazedTerracottaEntity extends BlockEntity {
         List<ItemEntity> list = world.getEntitiesByClass(ItemEntity.class, new Box(pos).offset(blockFacingUtility.getVec3dOpposite()), EntityPredicates.VALID_ENTITY);
         List<String> list2 = list.stream().map(ItemEntity::getStack).map(ItemStack::getTranslationKey).toList();
         for (String translationKey : list2) {
-            if (translationKey.equals(be.filter)) {
+            if (translationKey.equals(be.filter) == state.get(AllayedMagentaGlazedTerracotta.WHITELIST)) {
                 ItemEntity filteredItemEntity = list.get(list2.indexOf(translationKey));
                 filteredItemEntity.updatePosition(targetPos.getX()+.5, targetPos.getY()+.5, targetPos.getZ()+.5);
                 filteredItemEntity.setVelocity(0, 0.01, 0);
