@@ -18,7 +18,6 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -81,7 +80,7 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
                     } else {
                         player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist"));
                     }
-                    world.playSound(null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 1, 1);
+                    world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 1, 1);
                 }
                 return  ActionResult.SUCCESS;
             }
