@@ -13,6 +13,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -28,13 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
+    public static final BooleanProperty WHITELIST = BooleanProperty.of("whitelist");
     public static final DirectionProperty FACING = FacingBlock.FACING;
-//    public static final MapCodec<AllayedMagentaGlazedTerracotta> CODEC = createCodec(AllayedMagentaGlazedTerracotta::new);
-//
-//    @Override
-//    public MapCodec<AllayedMagentaGlazedTerracotta> getCodec() {
-//        return CODEC;
-//    }
 
     public AllayedMagentaGlazedTerracotta(Settings settings) {
         super(settings);
@@ -54,12 +50,12 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, WHITELIST);
     }
 
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH)));
+        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH).with(WHITELIST, true)));
     }
 
     @Override
@@ -80,13 +76,25 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof AllayedMagentaGlazedTerracottaEntity) {
             AllayedMagentaGlazedTerracottaEntity amgtEntity = (AllayedMagentaGlazedTerracottaEntity) blockEntity;
-            if (!player.getStackInHand(hand).isEmpty()) {
+            if (!player.getStackInHand(hand).isEmpty()) {       //!empty
                 world.playSound(null, pos, SoundEvents.ENTITY_ALLAY_ITEM_GIVEN, SoundCategory.BLOCKS, 1, 1);
                 NbtCompound nbtToRead = new NbtCompound();
                 nbtToRead.putString("filter", itemStack.getTranslationKey());
                 amgtEntity.readNbt(nbtToRead);
+                state.updateNeighbors(world, pos, NOTIFY_ALL);
+            } else if (player.isSneaking()) {           //empty+sneaking
+                world.setBlockState(pos, state.with(WHITELIST, !state.get(WHITELIST)));
+                if (!world.isClient) {
+                    if (!state.get(WHITELIST)) {
+                        player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist"));
+                    } else {
+                        player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist"));
+                    }
+                    world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 1, 1);
+                }
+                return  ActionResult.SUCCESS;
             }
-            NbtCompound nbtToWrite = new NbtCompound();
+            NbtCompound nbtToWrite = new NbtCompound();     //
             amgtEntity.writeNbt(nbtToWrite);
             if (!world.isClient) {
                 player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.message").append(Text.translatable(nbtToWrite.getString("filter")).formatted(Formatting.AQUA)));
@@ -104,6 +112,7 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
         tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.function_1").formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.function_2").formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.usage").formatted(Formatting.DARK_AQUA));
-        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage").formatted(Formatting.DARK_AQUA));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage_1").formatted(Formatting.DARK_AQUA));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage_2").formatted(Formatting.DARK_AQUA));
     }
 }
