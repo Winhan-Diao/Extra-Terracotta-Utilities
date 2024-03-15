@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "WMW",
+    "S S"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:magenta_glazed_terracotta"
+    },
+    "S": {
+      "item": "minecraft:snow_block"
+    },
+    "W": {
+      "item": "minecraft:waxed_copper_block"
+    }
+  },
+  "result": {
+    "item": "extra_terracotta_utilities:entropy_reducing_magenta_glazed_terracotta",
+    "count": 1
+  }
+}
