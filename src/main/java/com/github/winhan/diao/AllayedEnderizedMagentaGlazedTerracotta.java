@@ -146,7 +146,7 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
     public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.info.sneak"));
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.function").formatted(Formatting.GOLD));
-        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.function_1").formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.function_1", Text.translatable(Initializer.ENDERIZED_MAGENTA_GLAZED_TERRACOTTA.getTranslationKey())).formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.function_2").formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.usage").formatted(Formatting.DARK_AQUA));
         tooltip.add(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.usage").formatted(Formatting.DARK_AQUA));
