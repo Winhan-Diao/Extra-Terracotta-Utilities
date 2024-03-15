@@ -57,6 +57,7 @@ public class Initializer implements ModInitializer {
 				public void accept(ItemGroup.DisplayContext displayContext, ItemGroup.Entries entries) {
 					entries.add(POWERED_MAGENTA_GLAZED_TERRACOTTA);
 					entries.add(ENDERIZED_MAGENTA_GLAZED_TERRACOTTA);
+					entries.add(ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA);
 					entries.add(STICKY_MAGENTA_GLAZED_TERRACOTTA);
 					entries.add(EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA);
 					entries.add(ENHANCED_EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA);
