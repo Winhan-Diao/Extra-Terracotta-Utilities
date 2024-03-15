@@ -39,6 +39,7 @@ public class Initializer implements ModInitializer {
 	public static final Block POWERED_MAGENTA_GLAZED_TERRACOTTA = new PoweredMagentaGlazedTerracotta(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).requiresTool().strength(1.4F));
 	public static final Block STICKY_MAGENTA_GLAZED_TERRACOTTA = new StickyMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.GREEN).breakInstantly().slipperiness(0.8F).sounds(BlockSoundGroup.SLIME).nonOpaque());
 	public static final Block ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = new EnderizedMagentaGlazedTerracotta(AbstractBlock.Settings.create().instrument(Instrument.BASEDRUM).requiresTool().strength(1.8F));
+	public static final Block ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = new AllayedEnderizedMagentaGlazedTerracotta(AbstractBlock.Settings.create().instrument(Instrument.BASEDRUM).requiresTool().strength(1.8F));
 	public static final Block EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA = new ExplosiveMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.BRIGHT_RED).breakInstantly().sounds(BlockSoundGroup.GRASS).solidBlock(Blocks::never));
 	public static final Block ENHANCED_EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA = new EnhancedExplosiveMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.BLACK).breakInstantly().sounds(BlockSoundGroup.GRASS).strength(1.0f).solidBlock(Blocks::never));
 	public static final Block HAUNTED_MAGENTA_GLAZED_TERRACOTTA = new HauntedMagentaGlazedTerracotta(FabricBlockSettings.create().mapColor(MapColor.ORANGE).strength(1.0F).sounds(BlockSoundGroup.WOOD).luminance((state) -> 15).allowsSpawning(Blocks::always));
@@ -73,6 +74,9 @@ public class Initializer implements ModInitializer {
 	public static final BlockEntityType<AllayedMagentaGlazedTerracottaEntity> ALLAYED_MAGENTA_GLAZED_TERRACOTTA_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
 			new Identifier("extra_terracotta_utilities", "allayed_magenta_glazed_terracotta"),
 			FabricBlockEntityTypeBuilder.create(AllayedMagentaGlazedTerracottaEntity::new, ALLAYED_MAGENTA_GLAZED_TERRACOTTA).build());
+	public static final BlockEntityType<AllayedEnderizedMagentaGlazedTerracottaEntity> ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+			new Identifier("extra_terracotta_utilities", "allayed_enderized_magenta_glazed_terracotta"),
+			FabricBlockEntityTypeBuilder.create(AllayedEnderizedMagentaGlazedTerracottaEntity::new, ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA).build());
 
 	public static final BlockEntityType<EntropyReducingMagentaGlazedTerracottaEntity> ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
 			new Identifier("extra_terracotta_utilities", "entropy_reducing_magenta_glazed_terracotta"),
@@ -125,6 +129,9 @@ public class Initializer implements ModInitializer {
 		//Add a enderized_magenta_glazed_terracotta
 		Registry.register(Registries.BLOCK, new Identifier("extra_terracotta_utilities", "enderized_magenta_glazed_terracotta"), ENDERIZED_MAGENTA_GLAZED_TERRACOTTA);
 		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "enderized_magenta_glazed_terracotta"), new BlockItem(ENDERIZED_MAGENTA_GLAZED_TERRACOTTA, new FabricItemSettings()));
+		//Add a allayed_enderized_magenta_glazed_terracotta
+		Registry.register(Registries.BLOCK, new Identifier("extra_terracotta_utilities", "allayed_enderized_magenta_glazed_terracotta"), ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA);
+		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "allayed_enderized_magenta_glazed_terracotta"), new BlockItem(ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA, new FabricItemSettings()));
 		//Add a explosive_magenta_glazed_terracotta
 		Registry.register(Registries.BLOCK, new Identifier("extra_terracotta_utilities", "explosive_magenta_glazed_terracotta"), EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA);
 		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "explosive_magenta_glazed_terracotta"), new BlockItem(EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA, new FabricItemSettings()));
@@ -171,6 +178,7 @@ public class Initializer implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(HAUNTED_MAGENTA_GLAZED_TERRACOTTA));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(WOODEN_MAGENTA_GLAZED_TERRACOTTA));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(ALLAYED_MAGENTA_GLAZED_TERRACOTTA));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA));
 
 		//Register a dispenser block behavior
 		CARPETS_WOOLS.forEach(Initializer::registerDispenserBehaviorForStmgt);
