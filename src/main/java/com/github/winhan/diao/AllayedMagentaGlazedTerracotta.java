@@ -13,6 +13,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -28,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
+    public static final BooleanProperty WHITELIST = BooleanProperty.of("whitelist");
     public static final DirectionProperty FACING = FacingBlock.FACING;
     public static final MapCodec<AllayedMagentaGlazedTerracotta> CODEC = createCodec(AllayedMagentaGlazedTerracotta::new);
 
@@ -54,12 +56,12 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, WHITELIST);
     }
 
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH)));
+        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH).with(WHITELIST, true)));
     }
 
     @Override
