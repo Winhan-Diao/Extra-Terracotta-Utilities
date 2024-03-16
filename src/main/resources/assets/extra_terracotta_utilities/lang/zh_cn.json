@@ -64,5 +64,10 @@
   "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist_info": "当前白名单：",
   "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist_info": "当前黑名单：",
   "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist": "白名单模式",
-  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist": "黑名单模式"
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist": "黑名单模式",
+  "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage_1": "  手持物品右击方块设置过滤。",
+  "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage_2": "  潜行空手右击方块切换黑白名单模式",
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.function_1": "  %s的进阶版，",
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.function_2": "  你可以设置过滤。",
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.usage": "  潜行空手右击方块切换黑白名单模式"
 }

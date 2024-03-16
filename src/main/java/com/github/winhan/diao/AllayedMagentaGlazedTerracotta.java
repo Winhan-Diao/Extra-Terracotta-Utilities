@@ -103,7 +103,11 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
             NbtCompound nbtToWrite = new NbtCompound();     //
             amgtEntity.writeNbt(nbtToWrite);
             if (!world.isClient) {
-                player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.message").append(Text.translatable(nbtToWrite.getString("filter")).formatted(Formatting.AQUA)));
+                if (state.get(WHITELIST)) {
+                    player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.whitelist_info").append(Text.translatable(nbtToWrite.getString("filter")).formatted(Formatting.AQUA)));
+                } else {
+                    player.sendMessage(Text.translatable("block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.blacklist_info").append(Text.translatable(nbtToWrite.getString("filter")).formatted(Formatting.AQUA)));
+                }
             }
             return  ActionResult.SUCCESS;
         }
