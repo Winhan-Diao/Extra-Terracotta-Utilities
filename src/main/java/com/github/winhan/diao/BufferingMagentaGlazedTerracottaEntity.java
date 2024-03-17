@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.block.entity.ViewerCountManager;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -20,16 +21,19 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
     private final ViewerCountManager stateManager;
+    private final Vec3d targetPosCenter;
 
     public BufferingMagentaGlazedTerracottaEntity(BlockPos pos, BlockState state) {
         super(Initializer.BUFFERING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, pos, state);
         this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
+        this.targetPosCenter = pos.offset(state.get(Properties.FACING)).toCenterPos();
         this.stateManager = new ViewerCountManager() {
             protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
                 BufferingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
@@ -120,9 +124,15 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
             world.setBlockState(pos, state.with(Properties.TRIGGERED, false));
         }
         if (((!state.get(Properties.TRIGGERED) && state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED)) || (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED))) && !world.isClient) {
-            world.getPlayers().forEach(playerEntity -> playerEntity.sendMessage(Text.literal("aaa")));
-            if (state.get(BufferingMagentaGlazedTerracotta.IMPULSE)) {
-                world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
+            if (!be.inventory.stream().allMatch(ItemStack::isEmpty)) {
+                be.inventory.forEach(itemStack -> ItemPopout(be, itemStack, world));
+                be.inventory.clear();
+                be.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
+//                world.setBlockState(pos, state.with(Properties.OPEN, true), Block.NOTIFY_ALL);
+//                world.scheduleBlockTick(pos, state.getBlock(), 10);
+                if (state.get(BufferingMagentaGlazedTerracotta.IMPULSE)) {
+                    world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
+                }
             }
         }
 
@@ -132,12 +142,17 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         this.world.setBlockState(this.getPos(), state.with(BarrelBlock.OPEN, open), Block.NOTIFY_ALL);
     }
 
-    void playSound(BlockState state, SoundEvent soundEvent) {
+    public void playSound(BlockState state, SoundEvent soundEvent) {
         Vec3i vec3i = (state.get(BarrelBlock.FACING)).getVector();
         double d = (double)this.pos.getX() + 0.5 + (double)vec3i.getX() / 2.0;
         double e = (double)this.pos.getY() + 0.5 + (double)vec3i.getY() / 2.0;
         double f = (double)this.pos.getZ() + 0.5 + (double)vec3i.getZ() / 2.0;
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+    }
+
+    public static void ItemPopout(BufferingMagentaGlazedTerracottaEntity be, ItemStack itemStack, World world) {
+        ItemEntity itemEntity = new ItemEntity(world, be.targetPosCenter.getX(), be.targetPosCenter.getY(), be.targetPosCenter.getZ(), itemStack, 0, 0, 0);
+        world.spawnEntity(itemEntity);
     }
 
 }
