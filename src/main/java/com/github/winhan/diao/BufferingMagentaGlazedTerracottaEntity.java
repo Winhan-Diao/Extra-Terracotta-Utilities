@@ -123,14 +123,15 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
 
     public static void serverTick (World world, BlockPos pos, BlockState state, BufferingMagentaGlazedTerracottaEntity be) {
         if (state.get(Properties.TRIGGERED) && (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) || !state.get(Properties.POWERED))) {
-            world.setBlockState(pos, state.with(BufferingMagentaGlazedTerracotta.IMPULSE, false));
+            world.setBlockState(pos, state.with(Properties.TRIGGERED, false));
         }
-        if (!state.get(Properties.TRIGGERED) && state.get(Properties.POWERED) && !world.isClient) {
+        if (((!state.get(Properties.TRIGGERED) && state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED)) || (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED))) && !world.isClient) {
             world.getPlayers().forEach(playerEntity -> playerEntity.sendMessage(Text.literal("aaa")));
+            if (state.get(BufferingMagentaGlazedTerracotta.IMPULSE)) {
+                world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
+            }
         }
-        if (state.get(BufferingMagentaGlazedTerracotta.IMPULSE)) {
-            world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
-        }
+
     }
 
     void setOpen(BlockState state, boolean open) {
