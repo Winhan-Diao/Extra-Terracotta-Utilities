@@ -28,12 +28,14 @@ import net.minecraft.world.World;
 public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
     private final ViewerCountManager stateManager;
-    private final Vec3d targetPosCenter;
+    private final Vec3d popoutVec;
+    private final Vec3d popoutVelocity;
 
     public BufferingMagentaGlazedTerracottaEntity(BlockPos pos, BlockState state) {
         super(Initializer.BUFFERING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, pos, state);
         this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
-        this.targetPosCenter = pos.offset(state.get(Properties.FACING)).toCenterPos();
+        this.popoutVec = pos.offset(state.get(Properties.FACING)).toCenterPos().offset(state.get(Properties.FACING), -.3).subtract(0, .2, 0);
+        this.popoutVelocity = new Vec3d(state.get(Properties.FACING).getOffsetX()*.18, state.get(Properties.FACING).getOffsetY()*.18, state.get(Properties.FACING).getOffsetZ()*.18);
         this.stateManager = new ViewerCountManager() {
             protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
                 BufferingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
@@ -128,8 +130,6 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
                 be.inventory.forEach(itemStack -> ItemPopout(be, itemStack, world));
                 be.inventory.clear();
                 be.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
-//                world.setBlockState(pos, state.with(Properties.OPEN, true), Block.NOTIFY_ALL);
-//                world.scheduleBlockTick(pos, state.getBlock(), 10);
                 if (state.get(BufferingMagentaGlazedTerracotta.IMPULSE)) {
                     world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
                 }
@@ -151,7 +151,7 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
     }
 
     public static void ItemPopout(BufferingMagentaGlazedTerracottaEntity be, ItemStack itemStack, World world) {
-        ItemEntity itemEntity = new ItemEntity(world, be.targetPosCenter.getX(), be.targetPosCenter.getY(), be.targetPosCenter.getZ(), itemStack, 0, 0, 0);
+        ItemEntity itemEntity = new ItemEntity(world, be.popoutVec.getX(), be.popoutVec.getY(), be.popoutVec.getZ(), itemStack, be.popoutVelocity.x, be.popoutVelocity.y, be.popoutVelocity.z);
         world.spawnEntity(itemEntity);
     }
 

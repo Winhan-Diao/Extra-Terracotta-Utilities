@@ -10,6 +10,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -52,6 +53,11 @@ public class BufferingMagentaGlazedTerracotta extends BarrelBlock {
     }
 
     @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return this.getDefaultState().with(FACING, ctx.getPlayer().isSneaking() ? ctx.getPlayerLookDirection() : ctx.getPlayerLookDirection().getOpposite());
+    }
+
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
@@ -87,6 +93,12 @@ public class BufferingMagentaGlazedTerracotta extends BarrelBlock {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof BufferingMagentaGlazedTerracottaEntity bmgtEntity) {
                 bmgtEntity.setCustomName(itemStack.getName());
+            }
+        }
+        if (!world.isClient) {
+            boolean bl = world.isReceivingRedstonePower(pos);
+            if (bl != state.get(Properties.POWERED)) {
+                world.setBlockState(pos, state.with(Properties.POWERED, bl), Block.NOTIFY_ALL);
             }
         }
 
