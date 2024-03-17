@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,open=false": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta",
+      "x": 180
+    },
+    "facing=down,open=true": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta_open",
+      "x": 180
+    },
+    "facing=east,open=false": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,open=true": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta_open",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,open=false": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta",
+      "x": 90
+    },
+    "facing=north,open=true": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta_open",
+      "x": 90
+    },
+    "facing=south,open=false": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,open=true": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta_open",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,open=false": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta"
+    },
+    "facing=up,open=true": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta_open"
+    },
+    "facing=west,open=false": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,open=true": {
+      "model": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta_open",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

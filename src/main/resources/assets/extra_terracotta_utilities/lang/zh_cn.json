@@ -11,6 +11,7 @@
   "block.extra_terracotta_utilities.wooden_magenta_glazed_terracotta":"木品红色带釉陶瓦",
   "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta": "精准爆破品红色带釉陶瓦",
   "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta_uncovered": "损坏的精准爆破品红色带釉陶瓦",
+  "block.extra_terracotta_utilities.buffering_magenta_glazed_terracotta": "缓冲品红色带釉陶瓦",
   "itemGroup.extra_terracotta_utilities.terracotta_utilities": "更多实用带釉陶瓦",
   "block.extra_terracotta_utilities.haunted_magenta_glazed_terracotta.category": "注入灵魂",
   "tooltip.extra_terracotta_utilities.function": "[功能]",
@@ -69,5 +70,7 @@
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage_2": "  潜行空手右击方块切换黑白名单模式",
   "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.function_1": "  %s的进阶版，",
   "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.function_2": "  你可以设置过滤。",
-  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.usage": "  潜行空手右击方块切换黑白名单模式"
+  "block.extra_terracotta_utilities.allayed_enderized_magenta_glazed_terracotta.tooltip.usage": "  潜行空手右击方块切换黑白名单模式",
+  "block.extra_terracotta_utilities.buffering_magenta_glazed_terracotta.impulse": "接收脉冲信号",
+  "block.extra_terracotta_utilities.buffering_magenta_glazed_terracotta.continuous": "接收持续信号"
 }
