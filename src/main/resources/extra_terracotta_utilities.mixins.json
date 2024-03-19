@@ -3,6 +3,7 @@
 	"package": "com.github.winhan.diao.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
+		"HopperBlockEntityInvoker"
 	],
 	"server": [
 	],

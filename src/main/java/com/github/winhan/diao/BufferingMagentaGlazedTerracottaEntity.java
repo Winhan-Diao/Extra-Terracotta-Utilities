@@ -130,9 +130,9 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
                 be.inventory.forEach(itemStack -> ItemPopout(be, itemStack, world));
                 be.inventory.clear();
                 be.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
-                if (state.get(BufferingMagentaGlazedTerracotta.IMPULSE)) {
-                    world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
-                }
+            }
+            if (state.get(BufferingMagentaGlazedTerracotta.IMPULSE)) {
+                world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
             }
         }
 
