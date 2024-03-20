@@ -22,7 +22,6 @@
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.function_1": "  具备悦灵能力的带釉陶瓦，",
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.message": "筛选：",
   "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.function_2": "  它能够将筛选物品延着箭头方向挑出。",
-  "block.extra_terracotta_utilities.allayed_magenta_glazed_terracotta.tooltip.usage": "  手持需要筛选的物品右击它来设置。",
   "block.extra_terracotta_utilities.explosive_magenta_glazed_terracotta.tooltip.function_1": "  和TNT类似的带釉陶瓦，但可控且能无限使用。",
   "block.extra_terracotta_utilities.explosive_magenta_glazed_terracotta.tooltip.function_2": "  它能把先放一格的方块炸成凋落物状态。",
   "block.extra_terracotta_utilities.explosive_magenta_glazed_terracotta.tooltip.function_3": "  被炸的方块会掉落什么取决于它被TNT炸会掉什么。",
