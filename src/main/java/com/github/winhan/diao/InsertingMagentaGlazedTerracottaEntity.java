@@ -131,15 +131,16 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
                 if (to != null) {
                     for (int i = 0; i < be.inventory.size(); i++) {
                         ItemStack itemStack2 = HopperBlockEntity.transfer(be, to, be.getStack(i).copy(), direction.getOpposite());
-                        int finalI = i;
-                        if (!be.inventory.get(finalI).isEmpty()) world.getPlayers().forEach(player -> player.sendMessage(Text.literal(String.valueOf(finalI)).append(itemStack2.toHoverableText()).append(String.valueOf(itemStack2.getCount()))));
+//                        int finalI = i;
+//                        if (!be.inventory.get(finalI).isEmpty()) world.getPlayers().forEach(player -> player.sendMessage(Text.literal(String.valueOf(finalI)).append(itemStack2.toHoverableText()).append(String.valueOf(itemStack2.getCount()))));
                         if (itemStack2.getCount() != be.inventory.get(i).getCount()) {
                             be.inventory.set(i, itemStack2);
                         }
                     }
                     if (!formerBe.equals(be.inventory.stream().toList())) {
+                        world.updateNeighbors(pos, state.getBlock());
                         be.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
-                        world.getPlayers().forEach(player -> player.sendMessage(Text.literal("You did it!")));
+//                        world.getPlayers().forEach(player -> player.sendMessage(Text.literal("You did it!")));
                     }
                 }
             }
