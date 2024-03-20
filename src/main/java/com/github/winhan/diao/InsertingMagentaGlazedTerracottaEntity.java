@@ -30,6 +30,8 @@ import java.util.List;
 public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
     private final ViewerCountManager stateManager;
+    public static final int COOL_DOWN = 4;
+    private int cooldown = COOL_DOWN;
 
     public InsertingMagentaGlazedTerracottaEntity(BlockPos pos, BlockState state) {
         super(Initializer.INSERTING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, pos, state);
@@ -65,7 +67,7 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         if (!this.writeLootTable(nbt)) {
             Inventories.writeNbt(nbt, this.inventory);
         }
-
+        nbt.putInt("cooldown", this.cooldown);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         if (!this.readLootTable(nbt)) {
             Inventories.readNbt(nbt, this.inventory);
         }
-
+        this.cooldown = nbt.getInt("cooldown");
     }
 
     @Override
@@ -123,16 +125,14 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         if (state.get(Properties.TRIGGERED) && (!state.get(InsertingMagentaGlazedTerracotta.IMPULSE) || !state.get(Properties.POWERED))) {
             world.setBlockState(pos, state.with(Properties.TRIGGERED, false));
         }
-        if (((!state.get(Properties.TRIGGERED) && state.get(InsertingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED)) || (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED))) && !world.isClient) {
+        if (((!state.get(Properties.TRIGGERED) && state.get(InsertingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED)) || (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED) && be.cooldown--<0)) && !world.isClient) {
             if (!be.inventory.stream().allMatch(ItemStack::isEmpty)) {
                 Direction direction = state.get(Properties.FACING);
                 Inventory to = HopperBlockEntity.getInventoryAt(world, pos.offset(direction));
-                List<ItemStack> formerBe = be.inventory.stream().toList();
                 if (to != null) {
+                    List<ItemStack> formerBe = be.inventory.stream().toList();
                     for (int i = 0; i < be.inventory.size(); i++) {
                         ItemStack itemStack2 = HopperBlockEntity.transfer(be, to, be.getStack(i).copy(), direction.getOpposite());
-//                        int finalI = i;
-//                        if (!be.inventory.get(finalI).isEmpty()) world.getPlayers().forEach(player -> player.sendMessage(Text.literal(String.valueOf(finalI)).append(itemStack2.toHoverableText()).append(String.valueOf(itemStack2.getCount()))));
                         if (itemStack2.getCount() != be.inventory.get(i).getCount()) {
                             be.inventory.set(i, itemStack2);
                         }
@@ -140,14 +140,14 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
                     if (!formerBe.equals(be.inventory.stream().toList())) {
                         world.updateNeighbors(pos, state.getBlock());
                         be.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
-//                        world.getPlayers().forEach(player -> player.sendMessage(Text.literal("You did it!")));
                     }
-                }
-            }
+                }           //^ Run when target inventory is !empty
+                be.cooldown = COOL_DOWN;
+            }           //^ Run when inventory is !empty
             if (state.get(InsertingMagentaGlazedTerracotta.IMPULSE)) {
                 world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
             }
-        }
+        }           //^ Run when "impulse + !triggered + powered" or "!impulse + powered + !cooldown"
 
     }
 
@@ -163,6 +163,9 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
     }
 
+    private void debugMessage(String string) {
+        this.getWorld().getPlayers().forEach(player -> player.sendMessage(Text.literal(string)));
+    }
 
 }
 //world.getPlayers().forEach(player -> player.sendMessage(Text.literal("Yes")));
