@@ -3,9 +3,9 @@ package com.github.winhan.diao;
 import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.block.entity.ViewerCountManager;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -21,21 +21,19 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
     private final ViewerCountManager stateManager;
-    private final Vec3d popoutVec;
-    private final Vec3d popoutVelocity;
 
     public InsertingMagentaGlazedTerracottaEntity(BlockPos pos, BlockState state) {
         super(Initializer.INSERTING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, pos, state);
         this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
-        this.popoutVec = pos.offset(state.get(Properties.FACING)).toCenterPos().offset(state.get(Properties.FACING), -.3).subtract(0, .2, 0);
-        this.popoutVelocity = new Vec3d(state.get(Properties.FACING).getOffsetX()*.18, state.get(Properties.FACING).getOffsetY()*.18, state.get(Properties.FACING).getOffsetZ()*.18);
         this.stateManager = new ViewerCountManager() {
             protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
                 InsertingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
@@ -127,9 +125,23 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         }
         if (((!state.get(Properties.TRIGGERED) && state.get(InsertingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED)) || (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED))) && !world.isClient) {
             if (!be.inventory.stream().allMatch(ItemStack::isEmpty)) {
-                be.inventory.forEach(itemStack -> ItemPopout(be, itemStack, world));
-                be.inventory.clear();
-                be.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
+                Direction direction = state.get(Properties.FACING);
+                Inventory to = HopperBlockEntity.getInventoryAt(world, pos.offset(direction));
+                List<ItemStack> formerBe = be.inventory.stream().toList();
+                if (to != null) {
+                    for (int i = 0; i < be.inventory.size(); i++) {
+                        ItemStack itemStack2 = HopperBlockEntity.transfer(be, to, be.getStack(i).copy(), direction.getOpposite());
+                        int finalI = i;
+                        if (!be.inventory.get(finalI).isEmpty()) world.getPlayers().forEach(player -> player.sendMessage(Text.literal(String.valueOf(finalI)).append(itemStack2.toHoverableText()).append(String.valueOf(itemStack2.getCount()))));
+                        if (itemStack2.getCount() != be.inventory.get(i).getCount()) {
+                            be.inventory.set(i, itemStack2);
+                        }
+                    }
+                    if (!formerBe.equals(be.inventory.stream().toList())) {
+                        be.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
+                        world.getPlayers().forEach(player -> player.sendMessage(Text.literal("You did it!")));
+                    }
+                }
             }
             if (state.get(InsertingMagentaGlazedTerracotta.IMPULSE)) {
                 world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
@@ -150,9 +162,6 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
     }
 
-    public static void ItemPopout(InsertingMagentaGlazedTerracottaEntity be, ItemStack itemStack, World world) {
-        ItemEntity itemEntity = new ItemEntity(world, be.popoutVec.getX(), be.popoutVec.getY(), be.popoutVec.getZ(), itemStack, be.popoutVelocity.x, be.popoutVelocity.y, be.popoutVelocity.z);
-        world.spawnEntity(itemEntity);
-    }
 
 }
+//world.getPlayers().forEach(player -> player.sendMessage(Text.literal("Yes")));
