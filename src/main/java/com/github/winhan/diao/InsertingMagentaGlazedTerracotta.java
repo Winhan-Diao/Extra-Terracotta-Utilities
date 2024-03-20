@@ -28,15 +28,15 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class InventoryBufferingMagentaGlazedTerracotta extends BarrelBlock {
-    public static final MapCodec<BarrelBlock> CODEC = createCodec(InventoryBufferingMagentaGlazedTerracotta::new);
+public class InsertingMagentaGlazedTerracotta extends BarrelBlock {
+    public static final MapCodec<BarrelBlock> CODEC = createCodec(InsertingMagentaGlazedTerracotta::new);
     public static final BooleanProperty IMPULSE = BooleanProperty.of("impulse");
     @Override
     public MapCodec<BarrelBlock> getCodec() {
         return CODEC;
     }
 
-    public InventoryBufferingMagentaGlazedTerracotta(Settings settings) {
+    public InsertingMagentaGlazedTerracotta(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState()
                 .with(FACING, Direction.NORTH)
@@ -68,7 +68,7 @@ public class InventoryBufferingMagentaGlazedTerracotta extends BarrelBlock {
             return ActionResult.CONSUME;
         }
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof InventoryBufferingMagentaGlazedTerracottaEntity ibmgtEntity) {
+        if (blockEntity instanceof InsertingMagentaGlazedTerracottaEntity ibmgtEntity) {
             player.openHandledScreen(ibmgtEntity);
             player.incrementStat(Stats.OPEN_BARREL);
             PiglinBrain.onGuardedBlockInteracted(player, true);
@@ -79,7 +79,7 @@ public class InventoryBufferingMagentaGlazedTerracotta extends BarrelBlock {
     @Override
     @Nullable
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new InventoryBufferingMagentaGlazedTerracottaEntity(pos, state);
+        return new InsertingMagentaGlazedTerracottaEntity(pos, state);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class InventoryBufferingMagentaGlazedTerracotta extends BarrelBlock {
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         if (itemStack.hasCustomName()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof InventoryBufferingMagentaGlazedTerracottaEntity ibmgtEntity) {
+            if (blockEntity instanceof InsertingMagentaGlazedTerracottaEntity ibmgtEntity) {
                 ibmgtEntity.setCustomName(itemStack.getName());
             }
         }
@@ -117,7 +117,7 @@ public class InventoryBufferingMagentaGlazedTerracotta extends BarrelBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, Initializer.INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, InventoryBufferingMagentaGlazedTerracottaEntity::serverTick);
+        return validateTicker(type, Initializer.INSERTING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, InsertingMagentaGlazedTerracottaEntity::serverTick);
     }
 
 }

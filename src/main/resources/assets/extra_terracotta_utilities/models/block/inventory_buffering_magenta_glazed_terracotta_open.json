@@ -1,8 +1,0 @@
-{
-    "parent": "minecraft:block/cube_bottom_top",
-    "textures": {
-        "bottom": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta_bottom",
-        "side": "extra_terracotta_utilities:block/buffering_magenta_glazed_terracotta",
-        "top": "extra_terracotta_utilities:block/inventory_buffering_magenta_glazed_terracotta_top_open"
-    }
-}

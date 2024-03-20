@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "extra_terracotta_utilities:inventory_buffering_magenta_glazed_terracotta"
+          "name": "extra_terracotta_utilities:inserting_magenta_glazed_terracotta"
         }
       ],
       "conditions": [

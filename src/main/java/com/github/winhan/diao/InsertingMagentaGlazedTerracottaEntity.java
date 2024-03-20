@@ -25,26 +25,26 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
-public class InventoryBufferingMagentaGlazedTerracottaEntity extends LootableContainerBlockEntity {
+public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
     private final ViewerCountManager stateManager;
     private final Vec3d popoutVec;
     private final Vec3d popoutVelocity;
 
-    public InventoryBufferingMagentaGlazedTerracottaEntity(BlockPos pos, BlockState state) {
-        super(Initializer.INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, pos, state);
+    public InsertingMagentaGlazedTerracottaEntity(BlockPos pos, BlockState state) {
+        super(Initializer.INSERTING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, pos, state);
         this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
         this.popoutVec = pos.offset(state.get(Properties.FACING)).toCenterPos().offset(state.get(Properties.FACING), -.3).subtract(0, .2, 0);
         this.popoutVelocity = new Vec3d(state.get(Properties.FACING).getOffsetX()*.18, state.get(Properties.FACING).getOffsetY()*.18, state.get(Properties.FACING).getOffsetZ()*.18);
         this.stateManager = new ViewerCountManager() {
             protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
-                InventoryBufferingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
-                InventoryBufferingMagentaGlazedTerracottaEntity.this.setOpen(state, true);
+                InsertingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
+                InsertingMagentaGlazedTerracottaEntity.this.setOpen(state, true);
             }
 
             protected void onContainerClose(World world, BlockPos pos, BlockState state) {
-                InventoryBufferingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_CLOSE);
-                InventoryBufferingMagentaGlazedTerracottaEntity.this.setOpen(state, false);
+                InsertingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_CLOSE);
+                InsertingMagentaGlazedTerracottaEntity.this.setOpen(state, false);
             }
 
             protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
@@ -53,7 +53,7 @@ public class InventoryBufferingMagentaGlazedTerracottaEntity extends LootableCon
             protected boolean isPlayerViewing(PlayerEntity player) {
                 if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
                     Inventory inventory = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();
-                    return inventory == InventoryBufferingMagentaGlazedTerracottaEntity.this;
+                    return inventory == InsertingMagentaGlazedTerracottaEntity.this;
                 } else {
                     return false;
                 }
@@ -97,7 +97,7 @@ public class InventoryBufferingMagentaGlazedTerracottaEntity extends LootableCon
 
     @Override
     protected Text getContainerName() {
-        return Text.translatable("block.extra_terracotta_utilities.inventory_buffering_magenta_glazed_terracotta");
+        return Text.translatable("block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta");
     }
 
     @Override
@@ -121,17 +121,17 @@ public class InventoryBufferingMagentaGlazedTerracottaEntity extends LootableCon
 
     }
 
-    public static void serverTick (World world, BlockPos pos, BlockState state, InventoryBufferingMagentaGlazedTerracottaEntity be) {
-        if (state.get(Properties.TRIGGERED) && (!state.get(InventoryBufferingMagentaGlazedTerracotta.IMPULSE) || !state.get(Properties.POWERED))) {
+    public static void serverTick (World world, BlockPos pos, BlockState state, InsertingMagentaGlazedTerracottaEntity be) {
+        if (state.get(Properties.TRIGGERED) && (!state.get(InsertingMagentaGlazedTerracotta.IMPULSE) || !state.get(Properties.POWERED))) {
             world.setBlockState(pos, state.with(Properties.TRIGGERED, false));
         }
-        if (((!state.get(Properties.TRIGGERED) && state.get(InventoryBufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED)) || (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED))) && !world.isClient) {
+        if (((!state.get(Properties.TRIGGERED) && state.get(InsertingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED)) || (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED))) && !world.isClient) {
             if (!be.inventory.stream().allMatch(ItemStack::isEmpty)) {
                 be.inventory.forEach(itemStack -> ItemPopout(be, itemStack, world));
                 be.inventory.clear();
                 be.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
             }
-            if (state.get(InventoryBufferingMagentaGlazedTerracotta.IMPULSE)) {
+            if (state.get(InsertingMagentaGlazedTerracotta.IMPULSE)) {
                 world.setBlockState(pos, state.with(Properties.TRIGGERED, true));
             }
         }
@@ -150,7 +150,7 @@ public class InventoryBufferingMagentaGlazedTerracottaEntity extends LootableCon
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
     }
 
-    public static void ItemPopout(InventoryBufferingMagentaGlazedTerracottaEntity be, ItemStack itemStack, World world) {
+    public static void ItemPopout(InsertingMagentaGlazedTerracottaEntity be, ItemStack itemStack, World world) {
         ItemEntity itemEntity = new ItemEntity(world, be.popoutVec.getX(), be.popoutVec.getY(), be.popoutVec.getZ(), itemStack, be.popoutVelocity.x, be.popoutVelocity.y, be.popoutVelocity.z);
         world.spawnEntity(itemEntity);
     }

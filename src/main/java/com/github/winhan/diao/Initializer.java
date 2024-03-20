@@ -50,7 +50,7 @@ public class Initializer implements ModInitializer {
 	public static final Block SILK_TOUCHING_MAGENTA_GLAZED_TERRACOTTA = new SilkTouchingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.WHITE).breakInstantly().sounds(BlockSoundGroup.WOOL).solidBlock(Blocks::never));
 	public static final Block SILK_TOUCHING_MAGENTA_GLAZED_TERRACOTTA_UNCOVERED = new SilkTouchingMagentaGlazedTerracottaUncovered(AbstractBlock.Settings.create().mapColor(MapColor.WHITE).breakInstantly().sounds(BlockSoundGroup.WOOL).solidBlock(Blocks::never));
 	public static final Block BUFFERING_MAGENTA_GLAZED_TERRACOTTA = new BufferingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable());
-	public static final Block INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA = new InventoryBufferingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable());
+	public static final Block INSERTING_MAGENTA_GLAZED_TERRACOTTA = new InsertingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable());
 	private static final ItemGroup TERRACOTTA_UTILITIES = FabricItemGroup.builder()
 			.icon(()->new ItemStack(POWERED_MAGENTA_GLAZED_TERRACOTTA))
 			.displayName(Text.translatable("itemGroup.extra_terracotta_utilities.terracotta_utilities"))
@@ -70,7 +70,7 @@ public class Initializer implements ModInitializer {
 					entries.add(WOODEN_MAGENTA_GLAZED_TERRACOTTA);
 					entries.add(SILK_TOUCHING_MAGENTA_GLAZED_TERRACOTTA);
 					entries.add(BUFFERING_MAGENTA_GLAZED_TERRACOTTA);
-					entries.add(INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA);
+					entries.add(INSERTING_MAGENTA_GLAZED_TERRACOTTA);
 				}
 			}))
 			.build();
@@ -88,9 +88,9 @@ public class Initializer implements ModInitializer {
 	public static final BlockEntityType<BufferingMagentaGlazedTerracottaEntity> BUFFERING_MAGENTA_GLAZED_TERRACOTTA_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
 			new Identifier("extra_terracotta_utilities", "buffering_magenta_glazed_terracotta"),
 			FabricBlockEntityTypeBuilder.create(BufferingMagentaGlazedTerracottaEntity::new, BUFFERING_MAGENTA_GLAZED_TERRACOTTA).build());
-	public static final BlockEntityType<InventoryBufferingMagentaGlazedTerracottaEntity> INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
-			new Identifier("extra_terracotta_utilities", "inventory_buffering_magenta_glazed_terracotta"),
-			FabricBlockEntityTypeBuilder.create(InventoryBufferingMagentaGlazedTerracottaEntity::new, INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA).build());
+	public static final BlockEntityType<InsertingMagentaGlazedTerracottaEntity> INSERTING_MAGENTA_GLAZED_TERRACOTTA_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+			new Identifier("extra_terracotta_utilities", "inserting_magenta_glazed_terracotta"),
+			FabricBlockEntityTypeBuilder.create(InsertingMagentaGlazedTerracottaEntity::new, INSERTING_MAGENTA_GLAZED_TERRACOTTA).build());
 
 	public static final List<Item> CARPETS_WOOLS = Arrays.asList(WHITE_CARPET, CYAN_CARPET, BLUE_CARPET, BLACK_CARPET,
 			BROWN_CARPET, GRAY_CARPET, GREEN_CARPET, LIGHT_BLUE_CARPET,
@@ -171,9 +171,9 @@ public class Initializer implements ModInitializer {
 		//Add a buffering_magenta_glazed_terracotta
 		Registry.register(Registries.BLOCK, new Identifier("extra_terracotta_utilities", "buffering_magenta_glazed_terracotta"), BUFFERING_MAGENTA_GLAZED_TERRACOTTA);
 		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "buffering_magenta_glazed_terracotta"), new BlockItem(BUFFERING_MAGENTA_GLAZED_TERRACOTTA, new FabricItemSettings()));
-		//Add a inventory_buffering_magenta_glazed_terracotta
-		Registry.register(Registries.BLOCK, new Identifier("extra_terracotta_utilities", "inventory_buffering_magenta_glazed_terracotta"), INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA);
-		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "inventory_buffering_magenta_glazed_terracotta"), new BlockItem(INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA, new FabricItemSettings()));
+		//Add a inserting_magenta_glazed_terracotta
+		Registry.register(Registries.BLOCK, new Identifier("extra_terracotta_utilities", "inserting_magenta_glazed_terracotta"), INSERTING_MAGENTA_GLAZED_TERRACOTTA);
+		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "inserting_magenta_glazed_terracotta"), new BlockItem(INSERTING_MAGENTA_GLAZED_TERRACOTTA, new FabricItemSettings()));
 
 		//Register a itemgroup
 		Registry.register(Registries.ITEM_GROUP, new Identifier("extra_terracotta_utilities", "terracotta_utilities"), TERRACOTTA_UTILITIES);
@@ -185,7 +185,7 @@ public class Initializer implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(content -> content.add(SPINNING_MAGENTA_GLAZED_TERRACOTTA));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(content -> content.add(SILK_TOUCHING_MAGENTA_GLAZED_TERRACOTTA));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(content -> content.add(BUFFERING_MAGENTA_GLAZED_TERRACOTTA));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(content -> content.add(INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(content -> content.add(INSERTING_MAGENTA_GLAZED_TERRACOTTA));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(POWERED_MAGENTA_GLAZED_TERRACOTTA));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(STICKY_MAGENTA_GLAZED_TERRACOTTA));
@@ -199,7 +199,7 @@ public class Initializer implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(ALLAYED_MAGENTA_GLAZED_TERRACOTTA));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(BUFFERING_MAGENTA_GLAZED_TERRACOTTA));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(INVENTORY_BUFFERING_MAGENTA_GLAZED_TERRACOTTA));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.add(INSERTING_MAGENTA_GLAZED_TERRACOTTA));
 
 		//Register a dispenser block behavior
 		CARPETS_WOOLS.forEach(Initializer::registerDispenserBehaviorForStmgt);
