@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HopperBlockEntity.class)
-public class HopperBlockEntityInjector {
+public class HopperBlockEntityDebugInjector {
     @Inject(method = "readNbt", at = @At("HEAD"))
     public void injectReadNbt(NbtCompound nbt, CallbackInfo ci) {
         HopperBlockEntity thisHbe = (HopperBlockEntity)(Object)this;

@@ -51,6 +51,7 @@ public class Initializer implements ModInitializer {
 	public static final Block SILK_TOUCHING_MAGENTA_GLAZED_TERRACOTTA_UNCOVERED = new SilkTouchingMagentaGlazedTerracottaUncovered(AbstractBlock.Settings.create().mapColor(MapColor.WHITE).breakInstantly().sounds(BlockSoundGroup.WOOL).solidBlock(Blocks::never));
 	public static final Block BUFFERING_MAGENTA_GLAZED_TERRACOTTA = new BufferingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable());
 	public static final Block INSERTING_MAGENTA_GLAZED_TERRACOTTA = new InsertingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable());
+	public static final Item STICKY_CLOG = new Item(new FabricItemSettings().maxCount(1));
 	private static final ItemGroup TERRACOTTA_UTILITIES = FabricItemGroup.builder()
 			.icon(()->new ItemStack(POWERED_MAGENTA_GLAZED_TERRACOTTA))
 			.displayName(Text.translatable("itemGroup.extra_terracotta_utilities.terracotta_utilities"))
@@ -174,6 +175,9 @@ public class Initializer implements ModInitializer {
 		//Add a inserting_magenta_glazed_terracotta
 		Registry.register(Registries.BLOCK, new Identifier("extra_terracotta_utilities", "inserting_magenta_glazed_terracotta"), INSERTING_MAGENTA_GLAZED_TERRACOTTA);
 		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "inserting_magenta_glazed_terracotta"), new BlockItem(INSERTING_MAGENTA_GLAZED_TERRACOTTA, new FabricItemSettings()));
+
+		//Add clogs
+		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "sticky_clog"), STICKY_CLOG);
 
 		//Register a itemgroup
 		Registry.register(Registries.ITEM_GROUP, new Identifier("extra_terracotta_utilities", "terracotta_utilities"), TERRACOTTA_UTILITIES);
