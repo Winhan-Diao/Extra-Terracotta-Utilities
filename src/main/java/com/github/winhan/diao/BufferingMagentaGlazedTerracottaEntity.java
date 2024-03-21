@@ -126,9 +126,9 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
             world.setBlockState(pos, state.with(Properties.TRIGGERED, false));
         }
         if (((!state.get(Properties.TRIGGERED) && state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED)) || (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) && state.get(Properties.POWERED))) && !world.isClient) {
-            if (!be.inventory.stream().allMatch(ItemStack::isEmpty)) {
-                be.inventory.forEach(itemStack -> ItemPopout(be, itemStack, world));
-                be.inventory.clear();
+            if (!be.inventory.stream().filter(itemStack -> !isClogs(itemStack)).allMatch(ItemStack::isEmpty)) {
+                be.inventory.stream().filter(itemStack -> !isClogs(itemStack)).forEach(itemStack -> itemPopout(be, itemStack, world));
+                clear(be.inventory);
                 be.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
             }
             if (state.get(BufferingMagentaGlazedTerracotta.IMPULSE)) {
@@ -150,9 +150,20 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
     }
 
-    public static void ItemPopout(BufferingMagentaGlazedTerracottaEntity be, ItemStack itemStack, World world) {
+    public static void itemPopout(BufferingMagentaGlazedTerracottaEntity be, ItemStack itemStack, World world) {
         ItemEntity itemEntity = new ItemEntity(world, be.popoutVec.getX(), be.popoutVec.getY(), be.popoutVec.getZ(), itemStack, be.popoutVelocity.x, be.popoutVelocity.y, be.popoutVelocity.z);
         world.spawnEntity(itemEntity);
     }
 
+    public static boolean isClogs(ItemStack itemStack) {
+        return itemStack.isIn(Initializer.CLONGS);
+    }
+
+    public static void clear(DefaultedList<ItemStack> inventory) {
+        for(int i = 0; i < inventory.size(); ++i) {
+            if (!inventory.get(i).isIn(Initializer.CLONGS)) {
+                inventory.set(i, ItemStack.EMPTY);
+            }
+        }
+    }
 }

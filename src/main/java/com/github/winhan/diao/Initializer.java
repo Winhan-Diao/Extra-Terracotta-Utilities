@@ -13,6 +13,8 @@ import net.minecraft.block.enums.Instrument;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
@@ -52,6 +54,9 @@ public class Initializer implements ModInitializer {
 	public static final Block BUFFERING_MAGENTA_GLAZED_TERRACOTTA = new BufferingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable());
 	public static final Block INSERTING_MAGENTA_GLAZED_TERRACOTTA = new InsertingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable());
 	public static final Item STICKY_CLOG = new Item(new FabricItemSettings().maxCount(1));
+	public static final Item STICKY_CLOG_PIECE = new Item(new FabricItemSettings().maxCount(16));
+	public static final Item STICKY_CLOG_FRAGMENT = new Item(new FabricItemSettings().maxCount(64));
+	public static final TagKey<Item> CLONGS = TagKey.of(RegistryKeys.ITEM, new Identifier("extra_terracotta_utilities:clogs"));
 	private static final ItemGroup TERRACOTTA_UTILITIES = FabricItemGroup.builder()
 			.icon(()->new ItemStack(POWERED_MAGENTA_GLAZED_TERRACOTTA))
 			.displayName(Text.translatable("itemGroup.extra_terracotta_utilities.terracotta_utilities"))
@@ -72,6 +77,9 @@ public class Initializer implements ModInitializer {
 					entries.add(SILK_TOUCHING_MAGENTA_GLAZED_TERRACOTTA);
 					entries.add(BUFFERING_MAGENTA_GLAZED_TERRACOTTA);
 					entries.add(INSERTING_MAGENTA_GLAZED_TERRACOTTA);
+					entries.add(STICKY_CLOG);
+					entries.add(STICKY_CLOG_PIECE);
+					entries.add(STICKY_CLOG_FRAGMENT);
 				}
 			}))
 			.build();
@@ -119,6 +127,8 @@ public class Initializer implements ModInitializer {
 				}
 			}
 		});
+
+
 
 	}
 
@@ -178,6 +188,8 @@ public class Initializer implements ModInitializer {
 
 		//Add clogs
 		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "sticky_clog"), STICKY_CLOG);
+		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "sticky_clog_piece"), STICKY_CLOG_PIECE);
+		Registry.register(Registries.ITEM, new Identifier("extra_terracotta_utilities", "sticky_clog_fragment"), STICKY_CLOG_FRAGMENT);
 
 		//Register a itemgroup
 		Registry.register(Registries.ITEM_GROUP, new Identifier("extra_terracotta_utilities", "terracotta_utilities"), TERRACOTTA_UTILITIES);
@@ -207,7 +219,6 @@ public class Initializer implements ModInitializer {
 
 		//Register a dispenser block behavior
 		CARPETS_WOOLS.forEach(Initializer::registerDispenserBehaviorForStmgt);
-
 
 	}
 }
