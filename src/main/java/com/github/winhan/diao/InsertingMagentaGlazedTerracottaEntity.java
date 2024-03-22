@@ -37,19 +37,23 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         super(Initializer.INSERTING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, pos, state);
         this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
         this.stateManager = new ViewerCountManager() {
+            @Override
             protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
                 InsertingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
                 InsertingMagentaGlazedTerracottaEntity.this.setOpen(state, true);
             }
 
+            @Override
             protected void onContainerClose(World world, BlockPos pos, BlockState state) {
                 InsertingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_CLOSE);
                 InsertingMagentaGlazedTerracottaEntity.this.setOpen(state, false);
             }
 
+            @Override
             protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
             }
 
+            @Override
             protected boolean isPlayerViewing(PlayerEntity player) {
                 if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
                     Inventory inventory = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();

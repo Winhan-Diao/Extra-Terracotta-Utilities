@@ -37,19 +37,23 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
         this.popoutVec = pos.offset(state.get(Properties.FACING)).toCenterPos().offset(state.get(Properties.FACING), -.3).subtract(0, .2, 0);
         this.popoutVelocity = new Vec3d(state.get(Properties.FACING).getOffsetX()*.18, state.get(Properties.FACING).getOffsetY()*.18, state.get(Properties.FACING).getOffsetZ()*.18);
         this.stateManager = new ViewerCountManager() {
+            @Override
             protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
                 BufferingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
                 BufferingMagentaGlazedTerracottaEntity.this.setOpen(state, true);
             }
 
+            @Override
             protected void onContainerClose(World world, BlockPos pos, BlockState state) {
                 BufferingMagentaGlazedTerracottaEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_CLOSE);
                 BufferingMagentaGlazedTerracottaEntity.this.setOpen(state, false);
             }
 
+            @Override
             protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
             }
 
+            @Override
             protected boolean isPlayerViewing(PlayerEntity player) {
                 if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
                     Inventory inventory = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();

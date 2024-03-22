@@ -75,5 +75,23 @@
   "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta.tooltip.usage_2": "  If it's cover is worn out, it won't function.",
   "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta.tooltip.usage_3": "  Use wool or carpet on it to recover it. Dispenser also works.",
   "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta.tooltip.usage_4": "  If not worn out, the block will emit redstone signal of level 15 for comparator.",
-  "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta_uncovered.tooltip.add_1": "Worn Out"
+  "block.extra_terracotta_utilities.silk_touching_magenta_glazed_terracotta_uncovered.tooltip.add_1": "Worn Out",
+  "block.extra_terracotta_utilities.buffering_magenta_glazed_terracotta.tooltip.function_1": "  The terracotta that can store and popout items.",
+  "block.extra_terracotta_utilities.buffering_magenta_glazed_terracotta.tooltip.function_2": "  When activated, it pops out all stored items, except for sticky clogs.",
+  "block.extra_terracotta_utilities.buffering_magenta_glazed_terracotta.tooltip.function_3": "  Can emit comparator signal.",
+  "block.extra_terracotta_utilities.buffering_magenta_glazed_terracotta.tooltip.usage_1": "  It has two activation modes, impulse and continuous.",
+  "block.extra_terracotta_utilities.buffering_magenta_glazed_terracotta.tooltip.usage_2": "  Sneak and right click to change the mode.",
+  "block.extra_terracotta_utilities.buffering_magenta_glazed_terracotta.tooltip.usage_3": "  Activated by redstone signal.",
+  "block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.function_1": "  The terracotta that can store and output items.",
+  "block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.function_2": "  When activated, it tries to insert all stored items to the storage in its direction, except for sticky clogs.",
+  "block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.function_3": "  Can emit comparator signal.",
+  "block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.usage_1": "  It has two activation modes, impulse and continuous.",
+  "block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.usage_2": "  Sneak and right click to change the mode.",
+  "block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.usage_3": "  Activated by redstone signal.",
+  "item.extra_terracotta_utilities.clogs.tooltip.function_1": "  Sticky Clogs that can adhere to its slot. ",
+  "item.extra_terracotta_utilities.clogs.tooltip.function_2": "  They won't be extracted, transferred or popped out.",
+  "item.extra_terracotta_utilities.clogs.tooltip.function_3": "  But they can still strengthen comparator signal.",
+  "item.extra_terracotta_utilities.clogs.tooltip.usage_1": "  Break them down to increase the maximum stack. 1 -> 16 -> 64",
+  "item.extra_terracotta_utilities.clogs.tooltip.maxcount": "Maximum Stack: "
+
 }

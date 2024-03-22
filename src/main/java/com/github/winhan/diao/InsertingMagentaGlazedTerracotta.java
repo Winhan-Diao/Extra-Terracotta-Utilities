@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,13 +21,17 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class InsertingMagentaGlazedTerracotta extends BarrelBlock {
     public static final MapCodec<BarrelBlock> CODEC = createCodec(InsertingMagentaGlazedTerracotta::new);
@@ -119,5 +124,19 @@ public class InsertingMagentaGlazedTerracotta extends BarrelBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return validateTicker(type, Initializer.INSERTING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, InsertingMagentaGlazedTerracottaEntity::serverTick);
     }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
+        tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.info.sneak"));
+        tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.function").formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.function_1").formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.function_2").formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.function_3").formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.usage").formatted(Formatting.DARK_AQUA));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.usage_1").formatted(Formatting.DARK_AQUA));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.usage_2").formatted(Formatting.DARK_AQUA));
+        tooltip.add(Text.translatable("block.extra_terracotta_utilities.inserting_magenta_glazed_terracotta.tooltip.usage_3").formatted(Formatting.DARK_AQUA));
+    }
+
 
 }

@@ -53,9 +53,9 @@ public class Initializer implements ModInitializer {
 	public static final Block SILK_TOUCHING_MAGENTA_GLAZED_TERRACOTTA_UNCOVERED = new SilkTouchingMagentaGlazedTerracottaUncovered(AbstractBlock.Settings.create().mapColor(MapColor.WHITE).breakInstantly().sounds(BlockSoundGroup.WOOL).solidBlock(Blocks::never));
 	public static final Block BUFFERING_MAGENTA_GLAZED_TERRACOTTA = new BufferingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable());
 	public static final Block INSERTING_MAGENTA_GLAZED_TERRACOTTA = new InsertingMagentaGlazedTerracotta(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).instrument(Instrument.BASS).strength(2.5F).sounds(BlockSoundGroup.WOOD).burnable());
-	public static final Item STICKY_CLOG = new Item(new FabricItemSettings().maxCount(1));
-	public static final Item STICKY_CLOG_PIECE = new Item(new FabricItemSettings().maxCount(16));
-	public static final Item STICKY_CLOG_FRAGMENT = new Item(new FabricItemSettings().maxCount(64));
+	public static final Item STICKY_CLOG = new ClogsItem(new FabricItemSettings().maxCount(1), 1);
+	public static final Item STICKY_CLOG_PIECE = new ClogsItem(new FabricItemSettings().maxCount(16), 16);
+	public static final Item STICKY_CLOG_FRAGMENT = new ClogsItem(new FabricItemSettings().maxCount(64), 64);
 	public static final TagKey<Item> CLONGS = TagKey.of(RegistryKeys.ITEM, new Identifier("extra_terracotta_utilities:clogs"));
 	private static final ItemGroup TERRACOTTA_UTILITIES = FabricItemGroup.builder()
 			.icon(()->new ItemStack(POWERED_MAGENTA_GLAZED_TERRACOTTA))

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PSP",
+    "M M",
+    "PSP"
+  ],
+  "key": {
+    "M": {
+      "item": "extra_terracotta_utilities:powered_magenta_glazed_terracotta"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "extra_terracotta_utilities:buffering_magenta_glazed_terracotta",
+    "count": 1
+  }
+}
