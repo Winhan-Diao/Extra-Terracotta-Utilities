@@ -1,25 +1,19 @@
 package com.github.winhan.diao.mixin;
 
+import com.github.winhan.diao.Initializer;
 import net.minecraft.block.entity.HopperBlockEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
+import net.minecraft.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(HopperBlockEntity.class)
 public class HopperBlockEntityInjector {
-    @Inject(method = "transfer(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/Inventory;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/math/Direction;)Lnet/minecraft/item/ItemStack;",
-            at = @At("HEAD"),
-            cancellable = true)
-    private static void injectTransfer(Inventory from, Inventory _to, ItemStack stack, Direction side, CallbackInfoReturnable<ItemStack> cir) {
-        if (stack.isIn(TagKey.of(RegistryKeys.ITEM, new Identifier("extra_terracotta_utilities:clogs")))) {
-            cir.setReturnValue(stack);
-        }
+    @Redirect(method = "transfer(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/Inventory;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/math/Direction;)Lnet/minecraft/item/ItemStack;",
+              at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isEmpty()Z"))
+    private static boolean redirectIsEmpty(ItemStack instance) {
+        return instance == ItemStack.EMPTY || instance.getItem() == Items.AIR || instance.getCount() <= 0 || instance.isIn(Initializer.CLONGS);
     }
+
 }
