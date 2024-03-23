@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "extra_terracotta_utilities:item/sticky_clog_piece"
+  }
+}

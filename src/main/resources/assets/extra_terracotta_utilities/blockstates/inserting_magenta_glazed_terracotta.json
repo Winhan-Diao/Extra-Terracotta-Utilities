@@ -1,0 +1,108 @@
+{
+  "variants": {
+    "facing=down,open=false,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta",
+      "x": 180
+    },
+    "facing=down,open=true,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open",
+      "x": 180
+    },
+    "facing=east,open=false,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,open=true,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,open=false,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta",
+      "x": 90
+    },
+    "facing=north,open=true,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open",
+      "x": 90
+    },
+    "facing=south,open=false,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,open=true,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,open=false,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta"
+    },
+    "facing=up,open=true,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open"
+    },
+    "facing=west,open=false,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,open=true,powered=false": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,open=false,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_powered",
+      "x": 180
+    },
+    "facing=down,open=true,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open_powered",
+      "x": 180
+    },
+    "facing=east,open=false,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_powered",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,open=true,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open_powered",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,open=false,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_powered",
+      "x": 90
+    },
+    "facing=north,open=true,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open_powered",
+      "x": 90
+    },
+    "facing=south,open=false,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_powered",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,open=true,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open_powered",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,open=false,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_powered"
+    },
+    "facing=up,open=true,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open_powered"
+    },
+    "facing=west,open=false,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_powered",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,open=true,powered=true": {
+      "model": "extra_terracotta_utilities:block/inserting_magenta_glazed_terracotta_open_powered",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

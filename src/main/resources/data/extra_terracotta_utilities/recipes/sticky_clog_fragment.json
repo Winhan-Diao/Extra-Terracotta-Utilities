@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "extra_terracotta_utilities:sticky_clog_piece"
+    }
+  ],
+  "result": {
+    "item": "extra_terracotta_utilities:sticky_clog_fragment",
+    "count": 16
+  }
+}

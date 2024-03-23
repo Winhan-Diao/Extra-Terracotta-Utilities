@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
 	"extra_terracotta_utilities:haunted_magenta_glazed_terracotta",
-    "extra_terracotta_utilities:wooden_magenta_glazed_terracotta"
+    "extra_terracotta_utilities:wooden_magenta_glazed_terracotta",
+    "extra_terracotta_utilities:buffering_magenta_glazed_terracotta",
+    "extra_terracotta_utilities:inserting_magenta_glazed_terracotta"
   ]
 }
