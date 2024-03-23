@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "extra_terracotta_utilities",
+	"version": "${version}",
+	"name": "Extra Terracotta Utilities",
+	"description": "Add several functional and utility terracotta that has the properties of \"arrow\"!",
+	"authors": [
+		"Winhan Diao"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/extra_terracotta_utilities/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.github.winhan.diao.Initializer"
+		],
+		"client": [
+			"com.github.winhan.diao.InitializerClient"
+		],
+		"rei_client": [
+			"com.github.winhan.diao.compat.ModREIClientPlugin"
+		]
+	},
+	"mixins": [
+		"extra_terracotta_utilities.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"minecraft": "~1.19.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

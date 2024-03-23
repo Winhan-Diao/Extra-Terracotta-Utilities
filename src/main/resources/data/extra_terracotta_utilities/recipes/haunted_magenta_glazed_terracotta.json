@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " J ",
+    "BMB",
+    " W "
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:magenta_glazed_terracotta"
+    },
+    "B": {
+      "item": "minecraft:blaze_powder"
+    },
+    "W": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "J": {
+      "item": "minecraft:jack_o_lantern"
+    }
+  },
+  "result": {
+    "item": "extra_terracotta_utilities:haunted_magenta_glazed_terracotta",
+    "count": 1
+  }
+}

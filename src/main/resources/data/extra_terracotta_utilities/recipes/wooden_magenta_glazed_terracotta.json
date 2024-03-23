@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "L L",
+    "LML",
+    "LRL"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:magenta_glazed_terracotta"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "R": {
+      "item": "minecraft:muddy_mangrove_roots"
+    }
+  },
+  "result": {
+    "item": "extra_terracotta_utilities:wooden_magenta_glazed_terracotta",
+    "count": 1
+  }
+}
