@@ -1,8 +1,6 @@
 package com.github.winhan.diao.initialize;
 
-import com.github.winhan.diao.blocks.ExplosiveMagentaGlazedTerracotta;
-import com.github.winhan.diao.blocks.PoweredMagentaGlazedTerracotta;
-import com.github.winhan.diao.blocks.StickyMagentaGlazedTerracotta;
+import com.github.winhan.diao.blocks.*;
 import com.github.winhan.diao.items.ClogsItem;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -54,8 +52,8 @@ public class Initializer {
     public static final RegistryObject<Block> POWERED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("powered_magenta_glazed_terracotta", () -> new PoweredMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.4F)));
     public static final RegistryObject<Block> STICKY_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("sticky_magenta_glazed_terracotta", () -> new StickyMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).friction(0.8F).sound(SoundType.SLIME_BLOCK).noOcclusion().instabreak()));
     public static final RegistryObject<Block> EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("explosive_magenta_glazed_terracotta", () -> new ExplosiveMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.FIRE).instabreak().sound(SoundType.GRASS).isRedstoneConductor(((pState, pLevel, pPos) -> false))));
-    public static final RegistryObject<Block> ENHANCED_EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("enhanced_explosive_magenta_glazed_terracotta", () -> new ExplosiveMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BLACK).instabreak().sound(SoundType.GRASS).isRedstoneConductor(((pState, pLevel, pPos) -> false))));
-    public static final RegistryObject<Block> WOODEN_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("wooden_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f)));
+    public static final RegistryObject<Block> ENHANCED_EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("enhanced_explosive_magenta_glazed_terracotta", () -> new EnhancedExplosiveMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BLACK).instabreak().sound(SoundType.GRASS).isRedstoneConductor(((pState, pLevel, pPos) -> false))));
+    public static final RegistryObject<Block> WOODEN_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("wooden_magenta_glazed_terracotta", () -> new WoodenMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f)));
     public static final RegistryObject<Block> HAUNTED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("haunted_magenta_glazed_terracotta", () -> new PumpkinBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.0F).sound(SoundType.WOOD).lightLevel((state)->15).isValidSpawn(((pState, pLevel, pPos, pValue) -> true))));
     public static final RegistryObject<Block> ALLAYED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("allayed_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.4f)));
     public static final RegistryObject<Block> ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("enderized_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.8f)));
