@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "RMR",
+    "   "
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:magenta_glazed_terracotta"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "P": {
+      "item": "minecraft:powered_rail"
+    }
+  },
+  "result": {
+    "item": "extra_terracotta_utilities:powered_magenta_glazed_terracotta",
+    "count": 1
+  }
+}

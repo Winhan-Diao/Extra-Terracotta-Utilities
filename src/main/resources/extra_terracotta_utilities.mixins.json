@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.github.winhan.diao.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "extra_terracotta_utilities.mixin-refmap.json",
+  "minVersion": "0.8",
+  "mixins": [
+    "DispenserBlockEntityInjector",
+    "HopperBlockEntityInjector",
+    "InvWrapperInjector",
+    "SidedInvWrapperInjector"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

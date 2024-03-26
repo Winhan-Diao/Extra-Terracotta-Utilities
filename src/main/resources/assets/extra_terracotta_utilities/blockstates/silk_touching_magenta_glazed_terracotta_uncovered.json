@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "extra_terracotta_utilities:block/silk_touching_magenta_glazed_terracotta_uncovered",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "extra_terracotta_utilities:block/silk_touching_magenta_glazed_terracotta_uncovered",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "extra_terracotta_utilities:block/silk_touching_magenta_glazed_terracotta_uncovered"
+    },
+    "facing=west": {
+      "model": "extra_terracotta_utilities:block/silk_touching_magenta_glazed_terracotta_uncovered",
+      "y": 90
+    },
+	"facing=up": {
+	  "model": "extra_terracotta_utilities:block/silk_touching_magenta_glazed_terracotta_uncovered",
+      "x": 90
+	},
+	"facing=down": {
+	  "model": "extra_terracotta_utilities:block/silk_touching_magenta_glazed_terracotta_uncovered",
+      "x": 270
+	}
+  }
+}
