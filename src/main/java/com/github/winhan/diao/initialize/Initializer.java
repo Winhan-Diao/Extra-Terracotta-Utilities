@@ -1,20 +1,19 @@
 package com.github.winhan.diao.initialize;
 
+import com.github.winhan.diao.blockentities.AllayedMagentaGlazedTerracottaEntity;
 import com.github.winhan.diao.blocks.*;
 import com.github.winhan.diao.items.ClogsItem;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
@@ -27,12 +26,10 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.registries.tags.ITagManager;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -46,6 +43,8 @@ public class Initializer {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     // Create a Deferred Register to hold Items which will all be registered under the "extra_terracotta_utilities" namespace
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    // Create a Deferred Register to hold BlockEntityTypes which will all be registered under the "extra_terracotta_utilities" namespace
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "extra_terracotta_utilities" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -55,7 +54,7 @@ public class Initializer {
     public static final RegistryObject<Block> ENHANCED_EXPLOSIVE_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("enhanced_explosive_magenta_glazed_terracotta", () -> new EnhancedExplosiveMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BLACK).instabreak().sound(SoundType.GRASS).isRedstoneConductor(((pState, pLevel, pPos) -> false))));
     public static final RegistryObject<Block> WOODEN_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("wooden_magenta_glazed_terracotta", () -> new WoodenMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f).randomTicks()));
     public static final RegistryObject<Block> HAUNTED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("haunted_magenta_glazed_terracotta", () -> new HauntedMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.0F).sound(SoundType.WOOD).lightLevel((state)->15).isValidSpawn(((pState, pLevel, pPos, pValue) -> true))));
-    public static final RegistryObject<Block> ALLAYED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("allayed_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.4f)));
+    public static final RegistryObject<Block> ALLAYED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("allayed_magenta_glazed_terracotta", () -> new AllayedMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.4f)));
     public static final RegistryObject<Block> ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("enderized_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.8f)));
     public static final RegistryObject<Block> ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("allayed_enderized_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.8f)));
     public static final RegistryObject<Block> ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("entropy_reducing_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).requiresCorrectToolForDrops().strength(2.0F).sound(SoundType.SNOW)));
@@ -80,6 +79,12 @@ public class Initializer {
     public static final RegistryObject<Item> STICKY_CLOG = ITEMS.register("sticky_clog", () -> new ClogsItem(new Item.Properties().stacksTo(1), 1));
     public static final RegistryObject<Item> STICKY_CLOG_PIECE = ITEMS.register("sticky_clog_piece", () -> new ClogsItem(new Item.Properties().stacksTo(16), 16));
     public static final RegistryObject<Item> STICKY_CLOG_FRAGMENT = ITEMS.register("sticky_clog_fragment", () -> new ClogsItem(new Item.Properties().stacksTo(64), 64));
+    public static final RegistryObject<BlockEntityType<AllayedMagentaGlazedTerracottaEntity>> ALLAYED_MAGENTA_GLAZED_TERRACOTTA_ENTITY = BLOCK_ENTITY_TYPES.register(
+            "allayed_magenta_glazed_terracotta",
+            () -> BlockEntityType.Builder.of(AllayedMagentaGlazedTerracottaEntity::new,
+                                             ALLAYED_MAGENTA_GLAZED_TERRACOTTA.get())
+                                         .build(null));
+
     public static final TagKey<Item> CLOGS = ItemTags.create(new ResourceLocation(MODID, "clogs"));
     // Creates a creative tab with the id "extra_terracotta_utilities:example_tab" for the example item, that is placed after the combat tab
     public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("terracotta_utilities", () -> CreativeModeTab.builder()
@@ -119,6 +124,7 @@ public class Initializer {
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
+        BLOCK_ENTITY_TYPES.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
         // Register ourselves for server and other game events we are interested in

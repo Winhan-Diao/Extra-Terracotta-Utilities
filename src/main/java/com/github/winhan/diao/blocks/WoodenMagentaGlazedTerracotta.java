@@ -32,7 +32,7 @@ public class WoodenMagentaGlazedTerracotta extends Block {
 
     @Override
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (pLevel.getBlockState(pPos.below()).is(BlockTags.DIRT)) {
+        if (pLevel.getBlockState(pPos.above()).isAir() && pLevel.getBlockState(pPos.below()).is(BlockTags.DIRT)) {
             int i = pRandom.nextInt(100);
             if (i < LOG_CHANCE) {
                 pLevel.setBlock(pPos.above(), Blocks.OAK_LOG.defaultBlockState(), Block.UPDATE_ALL);
