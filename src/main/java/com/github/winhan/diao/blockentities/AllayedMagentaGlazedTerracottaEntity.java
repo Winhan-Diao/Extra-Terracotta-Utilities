@@ -2,6 +2,7 @@ package com.github.winhan.diao.blockentities;
 
 import com.github.winhan.diao.blocks.AllayedMagentaGlazedTerracotta;
 import com.github.winhan.diao.initialize.Initializer;
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
@@ -11,10 +12,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import org.slf4j.Logger;
 
 import java.util.List;
 
 public class AllayedMagentaGlazedTerracottaEntity extends BlockEntity{
+
+    Logger logger = LogUtils.getLogger();
+
     private String filter = "null";
     public AllayedMagentaGlazedTerracottaEntity(BlockPos pPos, BlockState pBlockState) {
         super(Initializer.ALLAYED_MAGENTA_GLAZED_TERRACOTTA_ENTITY.get(), pPos, pBlockState);

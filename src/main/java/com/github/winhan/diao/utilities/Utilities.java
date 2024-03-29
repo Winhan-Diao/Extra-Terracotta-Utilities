@@ -4,11 +4,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.ForgeEventFactory;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
 
 public class Utilities {
     public static <T extends Mob> void entityCreateAndSpawn (EntityType<T> entityType, ServerLevel level, BlockPos blockPos) {
@@ -19,4 +26,16 @@ public class Utilities {
         level.playSound(null, blockPos, SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.BLOCKS, 1.0f, 1.0f);
         level.destroyBlock(blockPos, false);
     }
+
+    public static void chanceToDestroyBlock (BlockPos pPos, Level pLevel, int pChance, boolean pDropBlock, RandomSource pRandom) {
+        int randInt = pRandom.nextInt(100);
+        if (randInt < pChance) {
+            pLevel.destroyBlock(pPos, pDropBlock);
+        }
+    }
+
+    public static boolean checkItemEntityValidityForPlacement(ItemEntity pItemEntity) {
+        return (pItemEntity.getItem().getCount() == 1 && pItemEntity.getItem().getItem() instanceof BlockItem);
+    }
+
 }

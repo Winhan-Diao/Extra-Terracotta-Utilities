@@ -1,11 +1,14 @@
 package com.github.winhan.diao.initialize;
 
+import com.github.winhan.diao.blockentities.AllayedEnderizedMagentaGlazedTerracottaEntity;
 import com.github.winhan.diao.blockentities.AllayedMagentaGlazedTerracottaEntity;
+import com.github.winhan.diao.blockentities.EntropyReducingMagentaGlazedTerracottaEntity;
 import com.github.winhan.diao.blocks.*;
 import com.github.winhan.diao.items.ClogsItem;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -55,9 +58,9 @@ public class Initializer {
     public static final RegistryObject<Block> WOODEN_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("wooden_magenta_glazed_terracotta", () -> new WoodenMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f).randomTicks()));
     public static final RegistryObject<Block> HAUNTED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("haunted_magenta_glazed_terracotta", () -> new HauntedMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.0F).sound(SoundType.WOOD).lightLevel((state)->15).isValidSpawn(((pState, pLevel, pPos, pValue) -> true))));
     public static final RegistryObject<Block> ALLAYED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("allayed_magenta_glazed_terracotta", () -> new AllayedMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.4f)));
-    public static final RegistryObject<Block> ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("enderized_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.8f)));
-    public static final RegistryObject<Block> ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("allayed_enderized_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.8f)));
-    public static final RegistryObject<Block> ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("entropy_reducing_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).requiresCorrectToolForDrops().strength(2.0F).sound(SoundType.SNOW)));
+    public static final RegistryObject<Block> ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("enderized_magenta_glazed_terracotta", () -> new EnderizedMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.8f)));
+    public static final RegistryObject<Block> ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("allayed_enderized_magenta_glazed_terracotta", () -> new AllayedEnderizedMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.8f)));
+    public static final RegistryObject<Block> ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("entropy_reducing_magenta_glazed_terracotta", () -> new EntropyReducingMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).requiresCorrectToolForDrops().strength(2.0F).sound(SoundType.SNOW)));
     public static final RegistryObject<Block> BUFFERING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("buffering_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> INSERTING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("inserting_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> SPINNING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("spinning_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().sound(SoundType.GRASS)));
@@ -84,12 +87,23 @@ public class Initializer {
             () -> BlockEntityType.Builder.of(AllayedMagentaGlazedTerracottaEntity::new,
                                              ALLAYED_MAGENTA_GLAZED_TERRACOTTA.get())
                                          .build(null));
+    public static final RegistryObject<BlockEntityType<AllayedEnderizedMagentaGlazedTerracottaEntity>> ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA_ENTITY = BLOCK_ENTITY_TYPES.register(
+            "allayed_enderized_magenta_glazed_terracotta",
+            () -> BlockEntityType.Builder.of(AllayedEnderizedMagentaGlazedTerracottaEntity::new,
+                                             ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA.get())
+                                         .build(null));
+    public static final RegistryObject<BlockEntityType<EntropyReducingMagentaGlazedTerracottaEntity>> ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA_ENTITY = BLOCK_ENTITY_TYPES.register(
+            "entropy_reducing_magenta_glazed_terracotta",
+            () -> BlockEntityType.Builder.of(EntropyReducingMagentaGlazedTerracottaEntity::new,
+                                             ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA.get())
+                                         .build(null));
 
     public static final TagKey<Item> CLOGS = ItemTags.create(new ResourceLocation(MODID, "clogs"));
     // Creates a creative tab with the id "extra_terracotta_utilities:example_tab" for the example item, that is placed after the combat tab
     public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("terracotta_utilities", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> POWERED_MAGENTA_GLAZED_TERRACOTTA_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.extra_terracotta_utilities.terracotta_utilities"))
             .displayItems((parameters, output) -> {
                 output.accept(STICKY_CLOG.get());
                 output.accept(STICKY_CLOG_PIECE.get());
