@@ -35,6 +35,9 @@ import java.util.List;
 
 public class BufferingMagentaGlazedTerracotta extends BarrelBlock {
     public static final BooleanProperty IMPULSE = BooleanProperty.of("impulse");
+
+    /**To do:
+     * formalize properties**/
     public BufferingMagentaGlazedTerracotta(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState()

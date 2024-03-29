@@ -23,6 +23,11 @@ public class AllayedMagentaGlazedTerracottaEntity extends BlockEntity {
         super(Initializer.ALLAYED_MAGENTA_GLAZED_TERRACOTTA_ENTITY, pos, state);
     }
 
+    /**To do:
+     * remove the awkward invocation of utility ( )
+     * bad box ( )
+     * awful iterate ( )
+     * bad break ( )**/
     public static void serverTick(World world, BlockPos pos, BlockState state, AllayedMagentaGlazedTerracottaEntity be) {
         BlockFacingUtility blockFacingUtility = BlockFacingUtility.getByDirection(state.get(Properties.FACING));
         BlockPos targetPos = pos.add(blockFacingUtility.getVec3i());

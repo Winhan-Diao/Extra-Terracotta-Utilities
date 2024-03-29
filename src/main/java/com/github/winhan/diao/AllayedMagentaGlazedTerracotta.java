@@ -53,6 +53,8 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
         builder.add(FACING, WHITELIST);
     }
 
+    /**To do:
+     * informal invocation ( )**/
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH).with(WHITELIST, true)));

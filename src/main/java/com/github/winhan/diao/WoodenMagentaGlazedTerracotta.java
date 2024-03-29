@@ -47,6 +47,8 @@ public class WoodenMagentaGlazedTerracotta extends Block {
         }
     }
 
+    /**To do:
+     * Why sneak info? ( )**/
     @Override
     public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.info.sneak"));

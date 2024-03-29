@@ -26,6 +26,8 @@ public class PoweredMagentaGlazedTerracotta extends GlazedTerracottaBlock {
         return this.getDefaultState().with(FACING, ctx.getPlayer().isSneaking() ? ctx.getHorizontalPlayerFacing().getOpposite() : ctx.getHorizontalPlayerFacing());
     }
 
+    /**To do: 
+     * need improvement ( )**/
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if (state.get(FACING) == Direction.NORTH && !entity.isSneaking()) {

@@ -1,6 +1,5 @@
 package com.github.winhan.diao;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -117,7 +116,7 @@ public class InsertingMagentaGlazedTerracotta extends BarrelBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, Initializer.INSERTING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, InsertingMagentaGlazedTerracottaEntity::serverTick);
+        return checkType(type, Initializer.INSERTING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, InsertingMagentaGlazedTerracottaEntity::constantTick);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.github.winhan.diao;
 
 import com.github.winhan.diao.utility.BlockFacingUtility;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -27,25 +26,17 @@ import java.util.List;
 public class EntropyReducingMagentaGlazedTerracotta extends BlockWithEntity {
     public static final int BREAK_CHANCE = 10;
     public static final DirectionProperty FACING = FacingBlock.FACING;
-//    public static final MapCodec<EntropyReducingMagentaGlazedTerracotta> CODEC = createCodec(EntropyReducingMagentaGlazedTerracotta::new);
-
 
     public EntropyReducingMagentaGlazedTerracotta(Settings settings) {
         super(settings);
         this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH)));
     }
 
-//    @Override
-//    protected MapCodec<? extends BlockWithEntity> getCodec() {
-//        return CODEC;
-//    }
-
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new EntropyReducingMagentaGlazedTerracottaEntity(pos, state);
     }
-
 
     @Override
     public BlockRenderType getRenderType(BlockState state) {
@@ -63,6 +54,9 @@ public class EntropyReducingMagentaGlazedTerracotta extends BlockWithEntity {
         return this.getDefaultState().with(FACING, ctx.getPlayer().isSneaking() ? ctx.getPlayerLookDirection().getOpposite() : ctx.getPlayerLookDirection());
     }
 
+    /**To do:
+     * remove awkward usage of utility ( )
+     * add randomDisplayTick for water freezing ( )**/
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (world.getBlockState(pos.add(BlockFacingUtility.getByDirection(state.get(FACING)).getVec3i())).isOf(Blocks.WATER)
@@ -75,7 +69,7 @@ public class EntropyReducingMagentaGlazedTerracotta extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, Initializer.ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, EntropyReducingMagentaGlazedTerracottaEntity::serverTick);
+        return checkType(type, Initializer.ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, EntropyReducingMagentaGlazedTerracottaEntity::constantTick);
     }
 
     @Override

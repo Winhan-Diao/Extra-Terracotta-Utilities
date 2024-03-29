@@ -27,17 +27,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class EnderizedMagentaGlazedTerracotta extends FacingBlock {
-//    public static final MapCodec<EnderizedMagentaGlazedTerracotta> CODEC = createCodec(EnderizedMagentaGlazedTerracotta::new);
 
+    /**To do:
+     * Standardize properties ( )**/
     public EnderizedMagentaGlazedTerracotta(Settings settings) {
         super(settings);
         this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH))/*.with(POWERED, false)*/);
     }
-
-//    @Override
-//    protected MapCodec<? extends FacingBlock> getCodec() {
-//        return CODEC;
-//    }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
@@ -54,6 +50,8 @@ public class EnderizedMagentaGlazedTerracotta extends FacingBlock {
         world.scheduleBlockTick(pos, world.getBlockState(pos).getBlock(), 20);
     }
 
+    /**To do:
+     * bad use ( )**/
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (!world.isClient()) {
@@ -63,6 +61,8 @@ public class EnderizedMagentaGlazedTerracotta extends FacingBlock {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
+    /**To do:
+     * bad code ( )**/
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         switch (state.get(FACING)) {

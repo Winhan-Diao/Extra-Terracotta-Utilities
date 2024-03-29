@@ -125,7 +125,7 @@ public class InsertingMagentaGlazedTerracottaEntity extends LootableContainerBlo
 
     }
 
-    public static void serverTick (World world, BlockPos pos, BlockState state, InsertingMagentaGlazedTerracottaEntity be) {
+    public static void constantTick(World world, BlockPos pos, BlockState state, InsertingMagentaGlazedTerracottaEntity be) {
         if (state.get(Properties.TRIGGERED) && (!state.get(InsertingMagentaGlazedTerracotta.IMPULSE) || !state.get(Properties.POWERED))) {
             world.setBlockState(pos, state.with(Properties.TRIGGERED, false));
         }

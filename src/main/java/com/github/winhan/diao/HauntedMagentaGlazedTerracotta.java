@@ -1,7 +1,9 @@
 package com.github.winhan.diao;
 
-import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -28,8 +30,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
-//    public static final MapCodec<GlazedTerracottaBlock> CODEC = createCodec(GlazedTerracottaBlock::new);
-
+    /**To do: 
+     * add transformation time for config ( )**/
     protected HauntedMagentaGlazedTerracotta(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(FACING, Direction.NORTH));
@@ -41,17 +43,16 @@ public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
     }
 
 
-//    @Override
-//    public MapCodec<GlazedTerracottaBlock> getCodec() {
-//        return CODEC;
-//    }
+    /**To do: 
+     * schedule on added ( )**/
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
 
-
+    /**To do: 
+     * Enum instead ( )**/
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (sourcePos.equals(pos.up()) && (world.getBlockState(pos.up()).isOf(Blocks.NETHERRACK) ||

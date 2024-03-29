@@ -70,6 +70,8 @@ public class ExplosiveMagentaGlazedTerracotta extends FacingBlock {
         }
     }
 
+    /**To do: 
+     * remove invocation of the awkward utility  ( )**/
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockFacingUtility blockFacingUtility = BlockFacingUtility.getByDirection(state.get(FACING));

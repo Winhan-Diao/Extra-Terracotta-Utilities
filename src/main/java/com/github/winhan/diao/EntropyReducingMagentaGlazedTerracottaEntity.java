@@ -44,7 +44,10 @@ public class EntropyReducingMagentaGlazedTerracottaEntity extends BlockEntity {
         return target;
     }
 
-    public static void serverTick(World world, BlockPos pos, BlockState state, EntropyReducingMagentaGlazedTerracottaEntity be) {
+    /**To do:
+     * remove awkward usage of utility ( )
+     * improve code logic ( )**/
+     public static void constantTick(World world, BlockPos pos, BlockState state, EntropyReducingMagentaGlazedTerracottaEntity be) {
         Vec3i posOffset = BlockFacingUtility.getByDirection(state.get(Properties.FACING)).getVec3i();
         if (!world.isClient) {
             List<ItemEntity> list = world.getEntitiesByClass(ItemEntity.class, new Box(pos.add(posOffset)), EntityPredicates.VALID_ENTITY);

@@ -22,6 +22,8 @@ public class StickyMagentaGlazedTerracotta extends SlimeBlock {
         super(settings);
     }
 
+    /**To do: 
+     * need formalize ( )**/
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if (!entity.isSneaking() && !(entity instanceof ExperienceOrbEntity)) {
