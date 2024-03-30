@@ -120,7 +120,6 @@ public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
-        tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.info.sneak"));
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.function").formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("block.extra_terracotta_utilities.haunted_magenta_glazed_terracotta.tooltip.function_1").formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.usage").formatted(Formatting.DARK_AQUA));
