@@ -34,6 +34,7 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
 
     public AllayedMagentaGlazedTerracotta(Settings settings) {
         super(settings);
+        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH).with(WHITELIST, true)));
     }
 
     @Override
@@ -46,6 +47,7 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new AllayedMagentaGlazedTerracottaEntity(pos, state);
+
     }
 
     @Override
@@ -54,12 +56,7 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
     }
 
     /**To do:
-     * informal invocation ( )**/
-    @Override
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH).with(WHITELIST, true)));
-    }
-
+     * informal invocation (done)**/
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState().with(FACING, ctx.getPlayer().isSneaking() ? ctx.getPlayerLookDirection().getOpposite() : ctx.getPlayerLookDirection());
