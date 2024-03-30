@@ -30,8 +30,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
-    /**To do: 
-     * add transformation time for config ( )**/
+    /**Config**/
+    private static final int TRANSFORM_TIME = ConfigsCommon.HAUNTED_TRANSFORM_TIME;
+
+    /**To do:
+     * add transformation time for config (done)**/
     protected HauntedMagentaGlazedTerracotta(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(FACING, Direction.NORTH));
@@ -43,8 +46,24 @@ public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
     }
 
 
-    /**To do: 
+    @Override
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        if (world.getBlockState(pos.up()).isOf(Blocks.NETHERRACK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.NETHER_GOLD_ORE) ||
+                world.getBlockState(pos.up()).isOf(Blocks.MAGMA_BLOCK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.GLOWSTONE) ||
+                world.getBlockState(pos.up()).isOf(Blocks.DRIED_KELP_BLOCK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.COAL_BLOCK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.PURPUR_BLOCK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.CRYING_OBSIDIAN) ||
+                world.getBlockState(pos.up()).isOf(Blocks.AMETHYST_CLUSTER)) {
+            world.scheduleBlockTick(pos, state.getBlock(), TRANSFORM_TIME);
+        }
+    }
+
+    /**To do:
      * schedule on added ( )**/
+
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
@@ -52,7 +71,7 @@ public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
     }
 
     /**To do: 
-     * Enum instead ( )**/
+     * Enum instead (disapproved: no need)**/
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (sourcePos.equals(pos.up()) && (world.getBlockState(pos.up()).isOf(Blocks.NETHERRACK) ||
@@ -64,7 +83,7 @@ public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
                 world.getBlockState(pos.up()).isOf(Blocks.PURPUR_BLOCK) ||
                 world.getBlockState(pos.up()).isOf(Blocks.CRYING_OBSIDIAN) ||
                 world.getBlockState(pos.up()).isOf(Blocks.AMETHYST_CLUSTER))) {
-            world.scheduleBlockTick(pos, state.getBlock(), 200);
+            world.scheduleBlockTick(pos, state.getBlock(), TRANSFORM_TIME);
         }
 
     }
