@@ -4,7 +4,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 
-
+@Deprecated
 public enum BlockFacingUtility {
     NORTH(Direction.NORTH, new Vec3i(0, 0, 1), new Vec3i(0, 0, -1), new Vec3d(0, 0, 1), new Vec3d(0, 0, -1)),
     SOUTH(Direction.SOUTH, new Vec3i(0, 0, -1), new Vec3i(0, 0, 1), new Vec3d(0, 0, -1), new Vec3d(0, 0, 1)),

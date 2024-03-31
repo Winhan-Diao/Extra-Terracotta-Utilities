@@ -40,6 +40,7 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
 
     public AllayedMagentaGlazedTerracotta(Settings settings) {
         super(settings);
+        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH).with(WHITELIST, true)));
     }
 
     @Override
@@ -57,11 +58,6 @@ public class AllayedMagentaGlazedTerracotta extends BlockWithEntity {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, WHITELIST);
-    }
-
-    @Override
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH).with(WHITELIST, true)));
     }
 
     @Override

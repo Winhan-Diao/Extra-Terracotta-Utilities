@@ -35,6 +35,7 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
     public static final BooleanProperty WHITELIST = BooleanProperty.of("whitelist");
     public AllayedEnderizedMagentaGlazedTerracotta(Settings settings) {
         super(settings);
+        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH).with(WHITELIST, true)));
     }
     @Nullable
     @Override
@@ -44,7 +45,6 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
 
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH).with(WHITELIST, true)));
             world.scheduleBlockTick(pos, world.getBlockState(pos).getBlock(), 20);
     }
 
