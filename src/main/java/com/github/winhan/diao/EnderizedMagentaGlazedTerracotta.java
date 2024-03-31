@@ -1,6 +1,5 @@
 package com.github.winhan.diao;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,7 +20,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.tick.TickPriority;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -29,10 +28,10 @@ import java.util.List;
 public class EnderizedMagentaGlazedTerracotta extends FacingBlock {
 
     /**To do:
-     * Standardize properties ( )**/
+     * Standardize properties (done)**/
     public EnderizedMagentaGlazedTerracotta(Settings settings) {
         super(settings);
-        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH))/*.with(POWERED, false)*/);
+        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.SOUTH)));
     }
 
     @Override
@@ -47,79 +46,29 @@ public class EnderizedMagentaGlazedTerracotta extends FacingBlock {
 
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        world.scheduleBlockTick(pos, world.getBlockState(pos).getBlock(), 20);
+        world.scheduleBlockTick(pos, world.getBlockState(pos).getBlock(), 20, TickPriority.LOW);
     }
 
     /**To do:
-     * bad use ( )**/
+     * bad use (done)**/
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (!world.isClient()) {
-            world.scheduleBlockTick(pos, world.getBlockState(pos).getBlock(), 20);
-
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        if (!world.isClient) {
+            world.scheduleBlockTick(pos, world.getBlockState(pos).getBlock(), 20, TickPriority.LOW);
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     /**To do:
-     * bad code ( )**/
+     * bad code (done)**/
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        switch (state.get(FACING)) {
-            case NORTH -> {
-                if (!world.getBlockState(pos.north()).isAir() && world.getBlockState(pos.south()).isAir()) {
-                    world.getServer().getCommandManager().executeWithPrefix(world.getServer().getCommandSource().withOutput(CommandOutput.DUMMY),
-                            String.format("clone %d %d %d %d %d %d %d %d %d", pos.getX(), pos.getY(), pos.getZ() - 1, pos.getX(), pos.getY(), pos.getZ() - 1, pos.getX(), pos.getY(), pos.getZ() + 1));
-                    world.removeBlockEntity(pos.north());
-                    world.setBlockState(pos.north(), Blocks.AIR.getDefaultState(), Block.field_31022);
-                    world.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
-            }
-            case SOUTH -> {
-                if (!world.getBlockState(pos.south()).isAir() && world.getBlockState(pos.north()).isAir()) {
-                    world.getServer().getCommandManager().executeWithPrefix(world.getServer().getCommandSource().withOutput(CommandOutput.DUMMY),
-                            String.format("clone %d %d %d %d %d %d %d %d %d", pos.getX(), pos.getY(), pos.getZ() + 1, pos.getX(), pos.getY(), pos.getZ() + 1, pos.getX(), pos.getY(), pos.getZ() - 1));
-                    world.removeBlockEntity(pos.south());
-                    world.setBlockState(pos.south(), Blocks.AIR.getDefaultState(), Block.field_31022);
-                    world.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
-            }
-            case EAST -> {
-                if (!world.getBlockState(pos.east()).isAir() && world.getBlockState(pos.west()).isAir()) {
-                    world.getServer().getCommandManager().executeWithPrefix(world.getServer().getCommandSource().withOutput(CommandOutput.DUMMY),
-                            String.format("clone %d %d %d %d %d %d %d %d %d", pos.getX() + 1, pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ(), pos.getX() - 1, pos.getY(), pos.getZ()));
-                    world.removeBlockEntity(pos.east());
-                    world.setBlockState(pos.east(), Blocks.AIR.getDefaultState(), Block.field_31022);
-                    world.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
-            }
-            case WEST -> {
-                if (!world.getBlockState(pos.west()).isAir() && world.getBlockState(pos.east()).isAir()) {
-                    world.getServer().getCommandManager().executeWithPrefix(world.getServer().getCommandSource().withOutput(CommandOutput.DUMMY),
-                            String.format("clone %d %d %d %d %d %d %d %d %d", pos.getX() - 1, pos.getY(), pos.getZ(), pos.getX() - 1, pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ()));
-                    world.removeBlockEntity(pos.west());
-                    world.setBlockState(pos.west(), Blocks.AIR.getDefaultState(), Block.field_31022);
-                    world.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
-            }
-            case UP -> {
-                if (!world.getBlockState(pos.up()).isAir() && world.getBlockState(pos.down()).isAir()) {
-                    world.getServer().getCommandManager().executeWithPrefix(world.getServer().getCommandSource().withOutput(CommandOutput.DUMMY),
-                            String.format("clone %d %d %d %d %d %d %d %d %d", pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX(), pos.getY() - 1, pos.getZ()));
-                    world.removeBlockEntity(pos.up());
-                    world.setBlockState(pos.up(), Blocks.AIR.getDefaultState(), Block.field_31022);
-                    world.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
-            }
-            case DOWN -> {
-                if (!world.getBlockState(pos.down()).isAir() && world.getBlockState(pos.up()).isAir()) {
-                    world.getServer().getCommandManager().executeWithPrefix(world.getServer().getCommandSource().withOutput(CommandOutput.DUMMY),
-                            String.format("clone %d %d %d %d %d %d %d %d %d", pos.getX(), pos.getY() - 1, pos.getZ(), pos.getX(), pos.getY() - 1, pos.getZ(), pos.getX(), pos.getY() + 1, pos.getZ()));
-                    world.removeBlockEntity(pos.down());
-                    world.setBlockState(pos.down(), Blocks.AIR.getDefaultState(), Block.field_31022);
-                    world.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
-            }
+        BlockPos startPos = pos.offset(state.get(FACING));
+        BlockPos endPos = pos.offset(state.get(FACING).getOpposite());
+        if (!world.getBlockState(startPos).isAir() && world.getBlockState(endPos).isAir()) {
+            world.getServer().getCommandManager().executeWithPrefix(world.getServer().getCommandSource().withOutput(CommandOutput.DUMMY),
+                    String.format("clone %1$d %2$d %3$d %1$d %2$d %3$d %4$d %5$d %6$d", startPos.getX(), startPos.getY(), startPos.getZ(), endPos.getX(), endPos.getY(), endPos.getZ()));
+            world.setBlockState(startPos, Blocks.AIR.getDefaultState(), field_31022);
+            world.playSound(null, pos, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 1.0f, 1.0f);
         }
     }
 
