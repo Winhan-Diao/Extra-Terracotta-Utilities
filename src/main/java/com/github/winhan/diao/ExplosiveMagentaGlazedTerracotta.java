@@ -1,6 +1,5 @@
 package com.github.winhan.diao;
 
-import com.github.winhan.diao.utility.BlockFacingUtility;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -72,12 +71,11 @@ public class ExplosiveMagentaGlazedTerracotta extends FacingBlock {
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        BlockFacingUtility blockFacingUtility = BlockFacingUtility.getByDirection(state.get(FACING));
-        BlockPos posTowards = pos.add(blockFacingUtility.getVec3i());
+        BlockPos posTowards = pos.offset(state.get(FACING).getOpposite());
         List<BlockPos> list = new ArrayList<>();
         if (!world.getBlockState(posTowards).isAir() && world.getBlockState(posTowards).getBlock().getBlastResistance() <= getMaxBlastResistance() && world.getBlockState(posTowards).getBlock().getHardness() >= 0) {
             list.add(posTowards);
-            Explosion explosion = new Explosion(world, null, pos.getX(), pos.getY(), pos.getZ(), 10.0f, list, Explosion.DestructionType.DESTROY, ParticleTypes.EXPLOSION, ParticleTypes.EXPLOSION_EMITTER, SoundEvents.ENTITY_GENERIC_EXPLODE);
+            Explosion explosion = new Explosion(world, null, pos.getX(), pos.getY(), pos.getZ(), 10.0f, false, Explosion.DestructionType.DESTROY, list);
             explosion.affectWorld(false);
             world.playSound(null, posTowards, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             world.spawnParticles(ParticleTypes.EXPLOSION, posTowards.getX()+.5, posTowards.getY()+.5, posTowards.getZ()+.5, 1, 0f, 0f, 0f, 1.0f);

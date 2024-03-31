@@ -128,8 +128,6 @@ public class Initializer implements ModInitializer {
 			}
 		});
 
-
-
 	}
 
 	@Override

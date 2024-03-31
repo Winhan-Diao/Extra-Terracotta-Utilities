@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -28,22 +27,13 @@ public class PoweredMagentaGlazedTerracotta extends GlazedTerracottaBlock {
 
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if (state.get(FACING) == Direction.NORTH && !entity.isSneaking()) {
-            entity.setVelocity(0, 0, .1);
-/*
-        for(Entity player :world.getPlayers()) {
-            player.sendMessage(Text.literal("Item moving..."));
-        }
-*/
-        }
-        if (state.get(FACING) == Direction.SOUTH && !entity.isSneaking()) {
-            entity.setVelocity(0, 0, -.1);
-        }
-        if (state.get(FACING) == Direction.EAST && !entity.isSneaking()) {
-            entity.setVelocity(-.1, 0, 0);
-        }
-        if (state.get(FACING) == Direction.WEST && !entity.isSneaking()) {
-            entity.setVelocity(.1, 0, 0);
+        if (!entity.isSneaking()) {
+            switch (state.get(FACING).getName()) {
+                case "north" -> entity.setVelocity(0, 0, .1);
+                case "south" -> entity.setVelocity(0, 0, -.1);
+                case "east" -> entity.setVelocity(-.1, 0, 0);
+                case "west" -> entity.setVelocity(.1, 0, 0);
+            }
         }
     }
 
@@ -55,3 +45,4 @@ public class PoweredMagentaGlazedTerracotta extends GlazedTerracottaBlock {
         tooltip.add(Text.translatable("block.extra_terracotta_utilities.powered_magenta_glazed_terracotta.tooltip.function_2").formatted(Formatting.GOLD));
         }
     }
+//world.getPlayers().forEach(player -> player.sendMessage(Text.literal("Item moving...")));

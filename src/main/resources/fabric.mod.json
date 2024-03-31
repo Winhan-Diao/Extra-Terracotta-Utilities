@@ -14,10 +14,12 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.github.winhan.diao.Initializer"
+          	"com.github.winhan.diao.Initializer",
+			"com.github.winhan.diao.ConfigsCommon"
 		],
 		"client": [
-			"com.github.winhan.diao.InitializerClient"
+			"com.github.winhan.diao.InitializerClient",
+			"com.github.winhan.diao.ConfigsClient"
 		],
 		"rei_client": [
 			"com.github.winhan.diao.compat.ModREIClientPlugin"

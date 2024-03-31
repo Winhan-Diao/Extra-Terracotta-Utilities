@@ -28,6 +28,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
+    /**Config**/
+    private static final int TRANSFORM_TIME = ConfigsCommon.HAUNTED_TRANSFORM_TIME;
+
     public static final MapCodec<GlazedTerracottaBlock> CODEC = createCodec(GlazedTerracottaBlock::new);
 
     protected HauntedMagentaGlazedTerracotta(Settings settings) {
@@ -47,6 +50,21 @@ public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
     }
 
     @Override
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        if (world.getBlockState(pos.up()).isOf(Blocks.NETHERRACK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.NETHER_GOLD_ORE) ||
+                world.getBlockState(pos.up()).isOf(Blocks.MAGMA_BLOCK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.GLOWSTONE) ||
+                world.getBlockState(pos.up()).isOf(Blocks.DRIED_KELP_BLOCK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.COAL_BLOCK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.PURPUR_BLOCK) ||
+                world.getBlockState(pos.up()).isOf(Blocks.CRYING_OBSIDIAN) ||
+                world.getBlockState(pos.up()).isOf(Blocks.AMETHYST_CLUSTER)) {
+            world.scheduleBlockTick(pos, state.getBlock(), TRANSFORM_TIME);
+        }
+    }
+
+    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
@@ -63,7 +81,7 @@ public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
                 world.getBlockState(pos.up()).isOf(Blocks.PURPUR_BLOCK) ||
                 world.getBlockState(pos.up()).isOf(Blocks.CRYING_OBSIDIAN) ||
                 world.getBlockState(pos.up()).isOf(Blocks.AMETHYST_CLUSTER))) {
-            world.scheduleBlockTick(pos, state.getBlock(), 200);
+            world.scheduleBlockTick(pos, state.getBlock(), TRANSFORM_TIME);
         }
 
     }
@@ -119,7 +137,6 @@ public class HauntedMagentaGlazedTerracotta extends HorizontalFacingBlock {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
-        tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.info.sneak"));
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.function").formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("block.extra_terracotta_utilities.haunted_magenta_glazed_terracotta.tooltip.function_1").formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("tooltip.extra_terracotta_utilities.usage").formatted(Formatting.DARK_AQUA));

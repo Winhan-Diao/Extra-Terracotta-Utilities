@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import static com.github.winhan.diao.EntropyReducingMagentaGlazedTerracotta.BREAK_CHANCE;
+import static com.github.winhan.diao.EntropyReducingMagentaGlazedTerracotta.FACING;
 import static net.minecraft.block.Block.NOTIFY_ALL;
 import static net.minecraft.block.Block.NOTIFY_LISTENERS;
 
@@ -44,18 +45,19 @@ public class EntropyReducingMagentaGlazedTerracottaEntity extends BlockEntity {
         return target;
     }
 
-    public static void serverTick(World world, BlockPos pos, BlockState state, EntropyReducingMagentaGlazedTerracottaEntity be) {
-        Vec3i posOffset = BlockFacingUtility.getByDirection(state.get(Properties.FACING)).getVec3i();
+    public static void constantTick(World world, BlockPos pos, BlockState state, EntropyReducingMagentaGlazedTerracottaEntity be) {
+        BlockPos targetPos = pos.offset(state.get(FACING).getOpposite());
+        BlockPos backPos = pos.offset(state.get(FACING));
         if (!world.isClient) {
-            List<ItemEntity> list = world.getEntitiesByClass(ItemEntity.class, new Box(pos.add(posOffset)), EntityPredicates.VALID_ENTITY);
+            List<ItemEntity> list = world.getEntitiesByClass(ItemEntity.class, new Box(targetPos), EntityPredicates.VALID_ENTITY);
             NbtCompound nbt = new NbtCompound();
             be.writeNbt(nbt);
             if (be.cooldown < 0) {      //Triggered at the end of cooldown.
                 if (!list.isEmpty() && !list.get(0).getStack().isOf(Items.AIR)) {
-                    be.placeBlockFromStack(world, pos.add(posOffset), list.get(0).getStack());
+                    be.placeBlockFromStack(world, targetPos, list.get(0).getStack());
                     world.playSound(null, pos, SoundEvents.BLOCK_POWDER_SNOW_STEP, SoundCategory.BLOCKS, 1, 1);
                     list.get(0).setStack(ItemStack.EMPTY);
-                    chanceToBreakIce(pos.subtract(posOffset), world, BREAK_CHANCE);
+                    chanceToBreakIce(backPos, world, BREAK_CHANCE);
                 }
                 nbt.putInt("cooldown", ENTROPY_COOLDOWN);
                 nbt.putString("target", "null");
@@ -65,8 +67,8 @@ public class EntropyReducingMagentaGlazedTerracottaEntity extends BlockEntity {
             } else {
                 if (be.target.equals("null")) {     //Triggered when there's no target. Will search for target.
                     if (list.size() == 1 && list.get(0).getStack().getCount() == 1
-                            && world.getBlockState(pos.add(posOffset)).isAir()
-                            && world.getBlockState(pos.subtract(posOffset)).isIn(BlockTags.ICE)) {
+                            && world.getBlockState(targetPos).isAir()
+                            && world.getBlockState(backPos).isIn(BlockTags.ICE)) {
                         if (list.get(0).getStack().getItem() instanceof BlockItem) {
                             world.playSound(null, pos, SoundEvents.BLOCK_POWDER_SNOW_STEP, SoundCategory.BLOCKS, 1, 1);
                             nbt.putString("target", list.get(0).getStack().getTranslationKey());        /*Set the target from the list of one stack*/
@@ -77,8 +79,8 @@ public class EntropyReducingMagentaGlazedTerracottaEntity extends BlockEntity {
                     }
                 } else {        //Triggered when there's a target already. Will count down the cooldown.
                     if (list.size() == 1
-                            && world.getBlockState(pos.add(posOffset)).isAir()
-                            && world.getBlockState(pos.subtract(posOffset)).isIn(BlockTags.ICE)) {
+                            && world.getBlockState(targetPos).isAir()
+                            && world.getBlockState(backPos).isIn(BlockTags.ICE)) {
                         be.cooldown--;
                     } else {
                         be.target = "null";
@@ -92,9 +94,9 @@ public class EntropyReducingMagentaGlazedTerracottaEntity extends BlockEntity {
             if (!be.target.equals("null")) {
                 Random random = world.getRandom();
                 world.addParticle(ParticleTypes.SNOWFLAKE,
-                        pos.add(posOffset).getX() + .5 + MathHelper.nextBetween(random, -.4f, .4f),
-                        pos.add(posOffset).getY() + .5 + MathHelper.nextBetween(random, -.4f, .4f),
-                        pos.add(posOffset).getZ() + .5 + MathHelper.nextBetween(random, -.4f, .4f),
+                        targetPos.getX() + .5 + MathHelper.nextBetween(random, -.4f, .4f),
+                        targetPos.getY() + .5 + MathHelper.nextBetween(random, -.4f, .4f),
+                        targetPos.getZ() + .5 + MathHelper.nextBetween(random, -.4f, .4f),
                         0, 0, 0);
             }
         }

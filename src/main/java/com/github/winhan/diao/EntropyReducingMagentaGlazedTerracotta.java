@@ -1,6 +1,5 @@
 package com.github.winhan.diao;
 
-import com.github.winhan.diao.utility.BlockFacingUtility;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -9,6 +8,8 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.BlockStateParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
@@ -17,6 +18,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -46,7 +48,6 @@ public class EntropyReducingMagentaGlazedTerracotta extends BlockWithEntity {
         return new EntropyReducingMagentaGlazedTerracottaEntity(pos, state);
     }
 
-
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         // 由于继承了BlockWithEntity，这个默认为INVISIBLE，所以我们需要更改它！
@@ -65,17 +66,32 @@ public class EntropyReducingMagentaGlazedTerracotta extends BlockWithEntity {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.getBlockState(pos.add(BlockFacingUtility.getByDirection(state.get(FACING)).getVec3i())).isOf(Blocks.WATER)
-                && world.getBlockState(pos.subtract(BlockFacingUtility.getByDirection(state.get(FACING)).getVec3i())).isIn(BlockTags.ICE)) {
-            world.setBlockState(pos.add(BlockFacingUtility.getByDirection(state.get(FACING)).getVec3i()), Blocks.ICE.getDefaultState(), NOTIFY_ALL);
-            EntropyReducingMagentaGlazedTerracottaEntity.chanceToBreakIce(pos.subtract(BlockFacingUtility.getByDirection(state.get(FACING)).getVec3i()), world, BREAK_CHANCE);
+        BlockPos backPos = pos.offset(state.get(FACING));
+        BlockPos targetPos = pos.offset(state.get(FACING).getOpposite());
+        if (world.getBlockState(targetPos).isOf(Blocks.WATER) && world.getBlockState(backPos).isIn(BlockTags.ICE)) {
+            world.setBlockState(targetPos, Blocks.ICE.getDefaultState(), NOTIFY_ALL);
+            EntropyReducingMagentaGlazedTerracottaEntity.chanceToBreakIce(pos.offset(state.get(FACING)), world, BREAK_CHANCE);
+        }
+
+    }
+
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        BlockPos backPos = pos.offset(state.get(FACING));
+        BlockPos targetPos = pos.offset(state.get(FACING).getOpposite());
+        if ((random.nextInt(10) == 0) && world.getBlockState(targetPos).isOf(Blocks.WATER) && world.getBlockState(backPos).isIn(BlockTags.ICE)) {
+            world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.ICE.getDefaultState()),
+                    targetPos.getX() + .5 + MathHelper.nextBetween(random, -.4f, .4f),
+                    targetPos.getY() + .5 + MathHelper.nextBetween(random, -.4f, .4f),
+                    targetPos.getZ() + .5 + MathHelper.nextBetween(random, -.4f, .4f),
+                    0, 0, 0);
         }
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, Initializer.ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, EntropyReducingMagentaGlazedTerracottaEntity::serverTick);
+        return validateTicker(type, Initializer.ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA_ENTITY, EntropyReducingMagentaGlazedTerracottaEntity::constantTick);
     }
 
     @Override
