@@ -1,6 +1,5 @@
 package com.github.winhan.diao;
 
-import com.github.winhan.diao.utility.BlockFacingUtility;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

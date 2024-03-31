@@ -1,10 +1,8 @@
 package com.github.winhan.diao;
 
-import com.github.winhan.diao.utility.BlockFacingUtility;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;

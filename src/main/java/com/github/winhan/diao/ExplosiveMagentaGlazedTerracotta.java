@@ -30,17 +30,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExplosiveMagentaGlazedTerracotta extends FacingBlock {
-//    public static final MapCodec<ExplosiveMagentaGlazedTerracotta> CODEC = createCodec(ExplosiveMagentaGlazedTerracotta::new);
     public static final BooleanProperty POWERED = Properties.POWERED;
 
     public float getMaxBlastResistance() {
         return Blocks.OBSIDIAN.getBlastResistance() / 2;
     }
-
-//    @Override
-//    protected MapCodec<? extends FacingBlock> getCodec() {
-//        return CODEC;
-//    }
 
     public ExplosiveMagentaGlazedTerracotta(Settings settings) {
         super(settings);
@@ -71,11 +65,10 @@ public class ExplosiveMagentaGlazedTerracotta extends FacingBlock {
     }
 
     /**To do: 
-     * remove invocation of the awkward utility  ( )**/
+     * remove invocation of the awkward utility  (done)**/
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        BlockFacingUtility blockFacingUtility = BlockFacingUtility.getByDirection(state.get(FACING));
-        BlockPos posTowards = pos.add(blockFacingUtility.getVec3i());
+        BlockPos posTowards = pos.offset(state.get(FACING).getOpposite());
         List<BlockPos> list = new ArrayList<>();
         if (!world.getBlockState(posTowards).isAir() && world.getBlockState(posTowards).getBlock().getBlastResistance() <= getMaxBlastResistance() && world.getBlockState(posTowards).getBlock().getHardness() >= 0) {
             list.add(posTowards);
