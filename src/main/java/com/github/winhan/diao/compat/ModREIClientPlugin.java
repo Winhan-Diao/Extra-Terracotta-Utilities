@@ -4,14 +4,9 @@ import com.github.winhan.diao.Initializer;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.api.common.entry.EntryIngredient;
-import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ModREIClientPlugin implements REIClientPlugin {
 
