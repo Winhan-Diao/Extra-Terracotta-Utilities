@@ -50,7 +50,6 @@ public class WoodenMagentaGlazedTerracotta extends Block {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-        pTooltip.add(Component.translatable("tooltip.extra_terracotta_utilities.info.sneak"));
         pTooltip.add(Component.translatable("tooltip.extra_terracotta_utilities.function").withStyle(ChatFormatting.GOLD));
         pTooltip.add(Component.translatable("block.extra_terracotta_utilities.wooden_magenta_glazed_terracotta.tooltip.function_1").withStyle(ChatFormatting.GOLD));
         pTooltip.add(Component.translatable("block.extra_terracotta_utilities.wooden_magenta_glazed_terracotta.tooltip.function_2").withStyle(ChatFormatting.GOLD));

@@ -36,10 +36,10 @@ public class EnderizedMagentaGlazedTerracotta extends DirectionalBlock {
         pBuilder.add(FACING);
     }
 
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getPlayer().isShiftKeyDown()? pContext.getNearestLookingDirection().getOpposite() : pContext.getNearestLookingDirection());
-    }
+        @Override
+        public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+            return this.defaultBlockState().setValue(FACING, pContext.getPlayer().isShiftKeyDown()? pContext.getNearestLookingDirection().getOpposite() : pContext.getNearestLookingDirection());
+        }
 
     @Override
     public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston) {

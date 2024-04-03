@@ -66,7 +66,7 @@ public class HauntedMagentaGlazedTerracotta extends HorizontalDirectionalBlock {
     @Override
     public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
         Block blockAbove = pLevel.getBlockState(pPos.above()).getBlock();
-        Arrays.stream(BlocksForTransform.values()).filter(blockFT -> blockFT.getBlock().equals(blockAbove)).map(BlocksForTransform::getEntityType).forEach(entityType -> Utilities.entityCreateAndSpawn(entityType, pLevel, pPos.above()));
+        Arrays.stream(BlocksForTransform.values()).filter(blockFT -> blockFT.getBlock().equals(blockAbove)).map(BlocksForTransform::getEntityType).forEach(entityType -> Utilities.mobCreateAndSpawn(entityType, pLevel, pPos.above()));
     }
 
     @Override

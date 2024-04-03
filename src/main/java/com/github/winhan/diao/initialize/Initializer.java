@@ -2,6 +2,7 @@ package com.github.winhan.diao.initialize;
 
 import com.github.winhan.diao.blockentities.AllayedEnderizedMagentaGlazedTerracottaEntity;
 import com.github.winhan.diao.blockentities.AllayedMagentaGlazedTerracottaEntity;
+import com.github.winhan.diao.blockentities.BufferingMagentaGlazedTerracottaEntity;
 import com.github.winhan.diao.blockentities.EntropyReducingMagentaGlazedTerracottaEntity;
 import com.github.winhan.diao.blocks.*;
 import com.github.winhan.diao.items.ClogsItem;
@@ -61,7 +62,7 @@ public class Initializer {
     public static final RegistryObject<Block> ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("enderized_magenta_glazed_terracotta", () -> new EnderizedMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.8f)));
     public static final RegistryObject<Block> ALLAYED_ENDERIZED_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("allayed_enderized_magenta_glazed_terracotta", () -> new AllayedEnderizedMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.8f)));
     public static final RegistryObject<Block> ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("entropy_reducing_magenta_glazed_terracotta", () -> new EntropyReducingMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).requiresCorrectToolForDrops().strength(2.0F).sound(SoundType.SNOW)));
-    public static final RegistryObject<Block> BUFFERING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("buffering_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> BUFFERING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("buffering_magenta_glazed_terracotta", () -> new BufferingMagentaGlazedTerracotta(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> INSERTING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("inserting_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> SPINNING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("spinning_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().sound(SoundType.GRASS)));
     public static final RegistryObject<Block> SILK_TOUCHING_MAGENTA_GLAZED_TERRACOTTA = BLOCKS.register("silk_touching_magenta_glazed_terracotta", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).instrument(NoteBlockInstrument.GUITAR).instabreak().sound(SoundType.WOOL)));
@@ -96,6 +97,11 @@ public class Initializer {
             "entropy_reducing_magenta_glazed_terracotta",
             () -> BlockEntityType.Builder.of(EntropyReducingMagentaGlazedTerracottaEntity::new,
                                              ENTROPY_REDUCING_MAGENTA_GLAZED_TERRACOTTA.get())
+                                         .build(null));
+    public static final RegistryObject<BlockEntityType<BufferingMagentaGlazedTerracottaEntity>> BUFFERING_MAGENTA_GLAZED_TERRACOTTA_ENTITY = BLOCK_ENTITY_TYPES.register(
+            "buffering_magenta_glazed_terracotta",
+            () -> BlockEntityType.Builder.of(BufferingMagentaGlazedTerracottaEntity::new,
+                                             BUFFERING_MAGENTA_GLAZED_TERRACOTTA.get())
                                          .build(null));
 
     public static final TagKey<Item> CLOGS = ItemTags.create(new ResourceLocation(MODID, "clogs"));

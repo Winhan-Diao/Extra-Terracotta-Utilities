@@ -8,6 +8,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -69,7 +70,7 @@ public class EntropyReducingMagentaGlazedTerracotta extends BaseEntityBlock {
 
     @Override
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (pLevel.getBlockState(pPos.relative(pState.getValue(FACING).getOpposite())).is(Blocks.WATER) && pLevel.getBlockState(pPos.relative(pState.getValue(FACING))).is(Blocks.ICE)) {
+        if (pLevel.getBlockState(pPos.relative(pState.getValue(FACING).getOpposite())).is(Blocks.WATER) && pLevel.getBlockState(pPos.relative(pState.getValue(FACING))).is(BlockTags.ICE)) {
             pLevel.setBlock(pPos.relative(pState.getValue(FACING).getOpposite()), Blocks.ICE.defaultBlockState(), UPDATE_ALL);
             Utilities.chanceToDestroyBlock(pPos.relative(pState.getValue(FACING)), pLevel, BREAK_CHANCE, false, pRandom);
         }
