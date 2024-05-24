@@ -4,7 +4,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
-
+/**To do:
+ * directory organization ( )**/
 public class AllayedEnderizedMagentaGlazedTerracottaEntity extends BlockEntity {
     private String filter = "null";
     public AllayedEnderizedMagentaGlazedTerracottaEntity(BlockPos pos, BlockState state) {

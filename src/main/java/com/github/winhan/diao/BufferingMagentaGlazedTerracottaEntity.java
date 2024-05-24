@@ -125,7 +125,9 @@ public class BufferingMagentaGlazedTerracottaEntity extends LootableContainerBlo
 
     }
 
-    public static void serverTick (World world, BlockPos pos, BlockState state, BufferingMagentaGlazedTerracottaEntity be) {
+    /**To do:
+     * fix messed up properties ( )**/
+    public static void constantTick(World world, BlockPos pos, BlockState state, BufferingMagentaGlazedTerracottaEntity be) {
         if (state.get(Properties.TRIGGERED) && (!state.get(BufferingMagentaGlazedTerracotta.IMPULSE) || !state.get(Properties.POWERED))) {
             world.setBlockState(pos, state.with(Properties.TRIGGERED, false));
         }

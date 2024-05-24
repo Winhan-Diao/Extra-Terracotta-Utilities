@@ -58,6 +58,8 @@ public class AllayedEnderizedMagentaGlazedTerracotta extends AllayedMagentaGlaze
             world.scheduleBlockTick(pos, world.getBlockState(pos).getBlock(), 20);
     }
 
+    /**To do:
+     * improve message info ( )**/
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         world.markDirty(pos);
