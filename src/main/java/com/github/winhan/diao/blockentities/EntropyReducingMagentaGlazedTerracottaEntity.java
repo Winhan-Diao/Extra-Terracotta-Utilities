@@ -9,6 +9,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -22,6 +23,8 @@ import net.minecraft.world.phys.AABB;
 import org.slf4j.Logger;
 
 import java.util.List;
+
+import static com.github.winhan.diao.blocks.EntropyReducingMagentaGlazedTerracotta.BREAK_CHANCE;
 
 public class EntropyReducingMagentaGlazedTerracottaEntity extends BlockEntity {
 
@@ -49,8 +52,9 @@ public class EntropyReducingMagentaGlazedTerracottaEntity extends BlockEntity {
 
     public static void constantTick(Level pLevel, BlockPos pPos, BlockState pState, EntropyReducingMagentaGlazedTerracottaEntity pBlockEntity) {
         BlockPos targetPos = pPos.relative(pState.getValue(EntropyReducingMagentaGlazedTerracotta.FACING).getOpposite());
+        BlockPos backPos = pPos.relative(pState.getValue(EntropyReducingMagentaGlazedTerracotta.FACING));
         List<ItemEntity> list = pLevel.getEntitiesOfClass(ItemEntity.class, new AABB(targetPos), Entity::isAlive);
-        if (list.size() != 1 || list.stream().noneMatch(Utilities::checkItemEntityValidityForPlacement)) {
+        if (list.size() != 1 || list.stream().noneMatch(Utilities::checkItemEntityValidityForPlacement) || !pLevel.getBlockState(backPos).is(BlockTags.ICE)) {
             pBlockEntity.target = "null";
             pBlockEntity.cooldown = ENTROPY_COOLDOWN;
             return;
@@ -74,6 +78,7 @@ public class EntropyReducingMagentaGlazedTerracottaEntity extends BlockEntity {
             list.forEach(Entity::kill);
             pLevel.playSound(null, pPos, SoundEvents.POWDER_SNOW_STEP, SoundSource.BLOCKS, 1.0f, 1.0f);
             pBlockEntity.cooldown = ENTROPY_COOLDOWN;       /*Just to make sure*/
+            Utilities.chanceToDestroyBlock(backPos, pLevel, BREAK_CHANCE, false, RandomSource.create());
         }       //↑ if cooldown is finished place the block
     }
 
